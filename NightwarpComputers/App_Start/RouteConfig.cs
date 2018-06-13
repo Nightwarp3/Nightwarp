@@ -18,6 +18,18 @@ namespace NightwarpComputers
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Home",
+                url: "Home",
+                defaults: new { action = "Home" }
+            );
+
+            routes.MapRoute(
+                name: "Order",
+                url: "Order",
+                defaults: new { controller = "OrderInterface", action = "Order" }
+            );
         }
     }
 }

@@ -1,0 +1,177 @@
+﻿body {
+    background-color: #4d4d4d;
+    color: #ffffff;
+}
+
+li {
+    font-size: 15px;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+.sectionHeading {
+    font-style: italic;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+.subHeading {
+    font-style: italic;
+    font-size: 17px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+.pageHeader {
+    font-weight: bold;
+    font-size: 30px;
+    font: Cambria;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.row {
+    margin: 15px;
+}
+
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.mainImage {
+    height: auto;
+    max-width: 95%;
+    clear: both;
+    border-radius: 8px;
+}
+
+.menu {
+    width: 80%;
+    padding: 0;
+    float: none;
+    margin: 0 auto;
+    background-color: #352929;
+    border: 2px hidden;
+    border-radius: 8px;
+}
+
+    .menu > a {
+        font-size: 20px;
+        padding: 15px;
+        color: #ffffff;
+        display: inline-block;
+        text-decoration: none;
+        border: 1px hidden;
+        border-radius: 8px;
+    }
+
+        .menu > a:hover {
+            font-weight: bold;
+            background-color: #4f3d3d;
+        }
+
+.main {
+    border: 1px solid #352929;
+    border-radius: 8px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 75%;
+    min-width: min-content;
+}
+
+.textImg {
+    height: auto;
+    width: 255px;
+    max-width: 100%;
+    float: left;
+    padding: 10px;
+}
+
+.submit {
+    background-color: #707070;
+    color: #ffffff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+    justify-content: center;
+    grid-gap: 10px;
+}
+
+    .grid > div {
+        text-align: left;
+        padding: 5px;
+    }
+
+.grid-width {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.radio {
+    margin: 15px;
+}

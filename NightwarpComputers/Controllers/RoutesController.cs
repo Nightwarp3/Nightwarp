@@ -6,9 +6,14 @@ using System.Web.Mvc;
 
 namespace NightwarpComputers.Controllers
 {
-    public class HomeController : Controller
+    public class RoutesController : Controller
     {
-        public ActionResult Index()
+        // GET: Routes
+        public ActionResult Home()
+        {
+            return View();
+        }
+        public ActionResult Order()
         {
             return View();
         }
