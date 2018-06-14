@@ -17,6 +17,9 @@
                 templateUrl: "routes/order",
                 controller: "OrderInterface"
             })
+            .when("/Order/Submit/:data", {
+                templateUrl: function (params) { return '/routes/orderSubmitted?data=' + params.data; }
+            })
             .otherwise({
                 redirectTo: "/Home"
             });

@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Code\SendNotifications.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -165,7 +166,7 @@
     </Content>
     <Content Include="Scripts\Controllers\HomeController.js" />
     <Content Include="Scripts\Controllers\OrderInterface.js" />
-    <Content Include="Scripts\NightwarpComputers.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

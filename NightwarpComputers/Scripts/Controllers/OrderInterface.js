@@ -1,8 +1,10 @@
-﻿var OrderInterface = function ($scope) {
+﻿var OrderInterface = function ($scope, $location) {
 
     $scope.message = "PC Builder: Order Form";
+    $scope.contactPref = "";
+    $scope.orderSubmitted = false;
 
-    $scope.submitOrder = function () {
+    $scope.reviewOrder = function () {
         if ($scope.emailPref && !$scope.phonePref) {
             $scope.contactPref = "Email";
         }
@@ -12,10 +14,15 @@
         else {
             $scope.contactPref = "Either";
         }
-        $scope.orderSubmitted = true;
+        $scope.orderReview = true;
     };
 
     $scope.editOrder = function () {
-        $scope.orderSubmitted = false;
+        $scope.orderReview = false;
+    };
+
+    $scope.sendOrder = function () {
+        var orderData = buildOrderData();
+        $location.path("/Order/Submit/");
     };
 };

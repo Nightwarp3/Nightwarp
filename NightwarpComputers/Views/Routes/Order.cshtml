@@ -1,6 +1,6 @@
 ﻿<div class="pageHeader">{{message}}</div>
 
-<form class="main" name="orderRequest" ng-hide="orderSubmitted" ng-submit="submitOrder()">
+<form class="main" name="orderRequest" ng-hide="orderReview" ng-submit="reviewOrder()">
     <div class="sectionHeading">Contact Information</div>
     <div class="grid">
         <div>First and Last Name:</div>
@@ -24,13 +24,13 @@
     <div class="sectionHeading">Order Information</div>
     <div class="grid">
         <label class="radio">
-            <input type="radio" name="buildType" value="orderOnly" ngClick="orderOnly" ng-model="buildType">Order Only
+            <input type="radio" name="buildType" required value="orderOnly" ngClick="orderOnly" ng-model="buildType">Order Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" value="buildOnly" ngClick="buildOnly" ng-model="buildType">Build Only
+            <input type="radio" name="buildType" required value="buildOnly" ngClick="buildOnly" ng-model="buildType">Build Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" value="orderBuild" ngClick="orderBuild" ng-model="buildType">Order and Build
+            <input type="radio" name="buildType" required value="orderBuild" ngClick="orderBuild" ng-model="buildType">Order and Build
         </label>
     </div>
     <div class="grid" ng-show="buildType == 'orderOnly' || buildType == 'orderBuild'">
@@ -153,7 +153,7 @@
     <input class="submit" type="submit" value="Review Order" />
 </form>
 
-<div name="orderReview" class="main" ng-show="orderSubmitted">
+<div name="orderReview" class="main" ng-show="orderReview">
     <div class="row">
         <div class="grid">
             <div>Name: <br /> {{name}}</div>
@@ -164,6 +164,6 @@
     </div>
     <div class="row">
         <button class="submit" ng-click="editOrder()">Edit Order</button>
-        <input class="submit" type="submit" value="Submit Order" />
+        <button class="submit" ng-click="sendOrder()">Send Order</button>
     </div>
 </div>

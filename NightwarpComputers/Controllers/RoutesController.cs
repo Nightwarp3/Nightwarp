@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using NightwarpComputers.Content;
 
 namespace NightwarpComputers.Controllers
 {
@@ -16,6 +15,23 @@ namespace NightwarpComputers.Controllers
         public ActionResult Order()
         {
             return View();
+        }
+        public ActionResult SendNotification(string[] orderData)
+        {
+            ViewBag.Data = orderData;
+            SendNotifications send = new SendNotifications();
+            bool mailSent = send.SendNotificationEmail(orderData);
+
+            if (mailSent)
+            {
+                Console.WriteLine("Email Sent");
+                return View();
+            }
+            else
+            {
+                Console.WriteLine("Email NOT Sent");
+                return View();
+            }
         }
     }
 }
