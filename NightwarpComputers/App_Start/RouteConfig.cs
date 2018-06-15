@@ -33,8 +33,8 @@ namespace NightwarpComputers
 
             routes.MapRoute(
                 name: "Submit",
-                url: "Order/Submit",
-                defaults: new { action = "SendNotification" }
+                url: "Submit/{orderData}",
+                defaults: new { controller = "OrderInterface", action = "SendNotification", orderData = UrlParameter.Optional }
             );
         }
     }

@@ -185,6 +185,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Routes\Home.cshtml" />
+    <Content Include="Views\Routes\OrderSubmitted.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

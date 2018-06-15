@@ -14,7 +14,7 @@ namespace NightwarpComputers
 
             bundles.Add(new ScriptBundle("~/bundles/NightwarpComputers")
                 .IncludeDirectory("~/Scripts/Controllers", "*.js")
-                .Include("~/Scripts/NightwarpComputers.js"));
+                .Include("~/Scripts/app.js"));
         }
     }
 }

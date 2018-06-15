@@ -18,20 +18,12 @@ namespace NightwarpComputers.Controllers
         }
         public ActionResult SendNotification(string[] orderData)
         {
-            ViewBag.Data = orderData;
             SendNotifications send = new SendNotifications();
             bool mailSent = send.SendNotificationEmail(orderData);
+            // Eventually write orderData to a DB, then return the DB's ID for the Order #
+            ViewBag.MailSent = mailSent;
 
-            if (mailSent)
-            {
-                Console.WriteLine("Email Sent");
-                return View();
-            }
-            else
-            {
-                Console.WriteLine("Email NOT Sent");
-                return View();
-            }
+            return View();
         }
     }
 }

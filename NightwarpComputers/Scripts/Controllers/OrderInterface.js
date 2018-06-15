@@ -23,6 +23,12 @@
 
     $scope.sendOrder = function () {
         var orderData = buildOrderData();
-        $location.path("/Order/Submit/");
+        $location.path("/Submit/" + orderData);
     };
+
+    var orderData = function () {
+        var array = [
+            "Name: " + $scope.name
+        ]
+    }
 };
