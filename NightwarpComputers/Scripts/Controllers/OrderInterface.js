@@ -26,9 +26,12 @@
         $location.path("/Submit/" + orderData);
     };
 
-    var orderData = function () {
+    var buildOrderData = function () {
         var array = [
-            "Name: " + $scope.name
+            "Name: " + $scope.name,
+            "Email: " + $scope.email
         ]
+
+        return array;
     }
 };

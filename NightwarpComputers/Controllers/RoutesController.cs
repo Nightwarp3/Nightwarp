@@ -16,7 +16,7 @@ namespace NightwarpComputers.Controllers
         {
             return View();
         }
-        public ActionResult SendNotification(string[] orderData)
+        public ActionResult OrderSubmitted(string orderData)
         {
             SendNotifications send = new SendNotifications();
             bool mailSent = send.SendNotificationEmail(orderData);

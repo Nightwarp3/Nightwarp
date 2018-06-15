@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Mail;
 using System.Collections.Generic;
 using System.Web;
@@ -14,7 +15,7 @@ namespace NightwarpComputers.Content
             mailSent = false;
         }
 
-        public bool SendNotificationEmail(string[] orderData)
+        public bool SendNotificationEmail(string orderData)
         {
             try
             {
@@ -22,29 +23,35 @@ namespace NightwarpComputers.Content
                 MailMessage message = SetupMailMessage(orderData);
 
                 client.Send(message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
 
-            return mailSent;
+                client.Dispose();
+                return mailSent;
+            }
+            catch
+            {
+                return mailSent;
+            }
         }
 
-        private static MailMessage SetupMailMessage(string[] order)
+        private static MailMessage SetupMailMessage(string order)
         {
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("OrderRequest@nightwarpcomps.com");
-            msg.To.Add(new MailAddress("mdcampb93@gmail.com"));
-            msg.Body = string.Join(",", order);
+            msg.From = new MailAddress("mdcampb93@gmail.com");
+            msg.To.Add(new MailAddress("swimmerboi93@hotmail.com"));
+            msg.Body = order;
             return msg;
         }
 
         private SmtpClient SetupSmtpClient()
         {
-            SmtpClient client = new SmtpClient("127.0.0.1", 25);
-            client.SendCompleted += Client_SendCompleted;
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new NetworkCredential(userName, password);
+            client.UseDefaultCredentials = true;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Timeout = 100000;
+            client.SendCompleted += Client_SendCompleted;
+
             return client;
         }
 
