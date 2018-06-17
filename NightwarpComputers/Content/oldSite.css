@@ -103,6 +103,7 @@ li {
 .mainImage {
     height: auto;
     max-width: 95%;
+    min-width: 467px;
     clear: both;
     border-radius: 8px;
 }

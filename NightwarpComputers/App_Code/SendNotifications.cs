@@ -17,47 +17,41 @@ namespace NightwarpComputers.Content
 
         public bool SendNotificationEmail(string orderData)
         {
+            SmtpClient client = SetupSmtpClient();
+            MailMessage message = SetupMailMessage(orderData);
+
             try
             {
-                SmtpClient client = SetupSmtpClient();
-                MailMessage message = SetupMailMessage(orderData);
-
                 client.Send(message);
-
-                client.Dispose();
-                return mailSent;
+                mailSent = true;
             }
-            catch
+            catch (Exception e)
             {
-                return mailSent;
+                client.Dispose();
             }
+            client.Dispose();
+            return mailSent;
         }
 
         private static MailMessage SetupMailMessage(string order)
         {
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("mdcampb93@gmail.com");
-            msg.To.Add(new MailAddress("swimmerboi93@hotmail.com"));
-            msg.Body = order;
+            msg.From = new MailAddress("NightwarpComputers@outlook.com");
+            msg.To.Add(new MailAddress("mdcampb93@gmail.com"));
+            msg.Subject = "New Order Request - " + DateTime.Now.ToString("yyyymmddhhmmss");
+            msg.Body = order.Replace(",", "\r");
             return msg;
         }
 
         private SmtpClient SetupSmtpClient()
         {
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new NetworkCredential(userName, password);
-            client.UseDefaultCredentials = true;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
-            client.Timeout = 100000;
-            client.SendCompleted += Client_SendCompleted;
+            SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+            {
+                Credentials = new NetworkCredential("NightwarpComputers@outlook.com", password),
+                EnableSsl = true
+            };
 
             return client;
-        }
-
-        private void Client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            mailSent = true;
         }
     }
 }

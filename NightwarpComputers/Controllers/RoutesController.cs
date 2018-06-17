@@ -21,8 +21,8 @@ namespace NightwarpComputers.Controllers
             SendNotifications send = new SendNotifications();
             bool mailSent = send.SendNotificationEmail(orderData);
             // Eventually write orderData to a DB, then return the DB's ID for the Order #
-            ViewBag.MailSent = mailSent;
 
+            ViewBag.MailSent = mailSent;
             return View();
         }
     }

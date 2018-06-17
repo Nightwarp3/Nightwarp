@@ -164,7 +164,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Controllers\HomeController.js" />
     <Content Include="Scripts\Controllers\OrderInterface.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Web.config" />
