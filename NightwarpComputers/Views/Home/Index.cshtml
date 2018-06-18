@@ -1,46 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
-
+<html ng-app="pcBuildInterface">
 <head>
-    <script data-require="angular.js@1.3.0-beta.5" data-semver="1.2.28" src="https://code.angularjs.org/1.2.28/angular.js"></script>
-    <script data-require="angular-route@1.2.14" data-semver="1.2.14" src="https://code.angularjs.org/1.2.14/angular-route.js"></script>
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">-->
-    @Scripts.Render("~/bundles/NightwarpComputers")
-    @Styles.Render("~/Content/cssOld")
 </head>
-
-<body ng-app="pcBuildInterface">
+<body>
     <div class="row">
         <div align="center">
             <img class="mainImage" name="mainImg" title="HeadingImage" src="https://lh3.googleusercontent.com/MZDFlGZyBjGlobxfmikHXOCLSNVaGoiPZxMD9oe7XaQmaDoUvmyIz74PuQrD_lazJs5l3-CMjRNqrFSipjJbdo7N2W3X3bAxpln3EBjJOBDOho5UXdVUtilxRu_2df0sKC_bLJAmejo9T-iKuEqTjq7OYMGEQ2x_lfOq299VRr6I7ppQErQF4enNyoP_QCD0wik3HvQee8Juz6f9YkCc4-B-KA_0MWKbdY2-f1yLwnEiFV1oQec-m7i4iP5nhQ8Z2cThpBEUdZ-Y3kHRhhSTUKZy_00zYMsJKEhL51gNZE6QG_jYU_J6ZdvXn3NAoR6DiQkX_KiDDJeDUZTyvRsLFcS_KMXeGcEckUpaa_0ulr0T952CmURUmJEw-b8jWYsrhiTanO31grL_YmEA8NpXy8ev88PXYpYpZ1ev_EcOKgfcBTkwzlLAbf-JQJJqyaDwo1D0rL_rueWUeHzfab_D0njAayolby7_Zo7aWZ4e4RBvbUGexVFH-zcglaXyRim1pKGcdAmnWxvLjmhBlf1dBJJlLR3YxryQBR1MTA68zuwtdSpat1fVdjp0DzkUXzvg8rqml9iS-PeEzzAdv490zeMeHqaaT7ct9_OJmvc=w1005-h206-no" />
         </div>
     </div>
-    <!--<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" ng-click="navbarProperties.isCollapsed = !navbarProperties.isCollapsed">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Nightwarp Computers</a>
-            </div>
-        </div>
-        <div class="navbar-collapse collapse" collapse="navbarProperties.isCollapsed">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/">About</a></li>
-                <li><a href="/Order">Order</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container" mainContent>
-        <div ng-view></div>
-    </div>-->
-
-
     <div class="row menu">
         <a href="/">Home</a>
         <a href="/">About</a>
@@ -49,6 +16,11 @@
     <div class="row">
         <div ng-view></div>
     </div>
-</body>
 
+
+    <script src="https://code.angularjs.org/1.2.28/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    @Scripts.Render("~/bundles/NightwarpComputers")
+    @Styles.Render("~/Content/cssOld")
+</body>
 </html>

@@ -1,13 +1,15 @@
-﻿var app = angular.module("pcBuildInterface", ["ngRoute"/*, "ui.bootstrap"*/]);
+﻿var app = angular.module("pcBuildInterface", ["ngRoute"]);
 
+app.controller("HomeController", HomeController);
 app.controller("OrderInterface", OrderInterface);
 
-app.config(function ($routeProvider, $locationProvider) {
+var configFunction = function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!').html5Mode(true);
 
     $routeProvider
         .when("/Home", {
-            templateUrl: "routes/home"
+            templateUrl: "routes/home",
+            controller: "HomeController"
         })
         .when("/Order", {
             templateUrl: "routes/order",
@@ -19,4 +21,7 @@ app.config(function ($routeProvider, $locationProvider) {
         .otherwise({
             redirectTo: "/Home"
         });
-});
+};
+configFunction.$inject = ['$routeProvider', '$locationProvider'];
+
+app.config(configFunction);

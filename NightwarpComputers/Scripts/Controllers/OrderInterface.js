@@ -39,6 +39,7 @@
             "Street Address 2: ",
             "City: ",
             "State: ",
+            "Zip: ",
             "Part Preferences: ",
             "Processor Type: ",
             "Processor Model: ",
@@ -60,6 +61,7 @@
             $scope.streetAddress2,
             $scope.city,
             $scope.state,
+            $scope.zip,
             $scope.partPreference,
             $scope.processorType,
             $scope.processorModel,
@@ -82,4 +84,4 @@
     }
 };
 
-OrderInterface.$inject = ['$scope', '$location'];
+OrderInterface.$inject = ['$scope', '$location']
