@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web;
 
@@ -15,31 +16,46 @@ namespace NightwarpComputers.Content
             mailSent = false;
         }
 
-        public bool SendNotificationEmail(string orderData)
+        public bool SendNewRequestAlert(string orderID, string request)
         {
             SmtpClient client = SetupSmtpClient();
-            MailMessage message = SetupMailMessage(orderData);
+            string subject = "New Order Request - " + orderID;
+            MailMessage msg = SetupMailMessage(new string[]{ "mdcampb93@gmail.com" }, subject, request.Replace(",", "\r\n"));
+            return SendMail(client, msg);
+        }
 
+        public bool SendNotificationEmail(string[] to, string subject, string message)
+        {
+            SmtpClient client = SetupSmtpClient();
+            MailMessage msg = SetupMailMessage(to, subject, message);
+            return SendMail(client, msg);
+        }
+
+        private bool SendMail(SmtpClient client, MailMessage msg)
+        {
             try
             {
-                client.Send(message);
+                client.Send(msg);
                 mailSent = true;
             }
             catch (Exception e)
             {
-                client.Dispose();
+                Console.WriteLine(e.Message);
             }
             client.Dispose();
             return mailSent;
         }
 
-        private static MailMessage SetupMailMessage(string order)
+        private static MailMessage SetupMailMessage(string[] to, string sub, string body)
         {
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("NightwarpComputers@outlook.com");
-            msg.To.Add(new MailAddress("mdcampb93@gmail.com"));
-            msg.Subject = "New Order Request - " + DateTime.Now.ToString("yyyymmddhhmmss");
-            msg.Body = order.Replace(",", "\r");
+            foreach (string address in to)
+            {
+                msg.To.Add(new MailAddress(address));
+            }
+            msg.Subject = sub;
+            msg.Body = body;
             return msg;
         }
 
@@ -47,7 +63,7 @@ namespace NightwarpComputers.Content
         {
             SmtpClient client = new SmtpClient("smtp.office365.com", 587)
             {
-                Credentials = new NetworkCredential("NightwarpComputers@outlook.com", password),
+                Credentials = new NetworkCredential("NightwarpComputers@outlook.com", "BurpingBanshees2"),
                 EnableSsl = true
             };
 

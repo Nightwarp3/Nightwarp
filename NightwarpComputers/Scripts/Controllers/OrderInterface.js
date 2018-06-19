@@ -14,6 +14,7 @@
     };
 
     $scope.sendOrder = function () {
+        $scope.orderSubmitted = true;
         $location.path("/Submit/" + $scope.orderData);
     };
 

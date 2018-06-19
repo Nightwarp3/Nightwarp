@@ -1,8 +1,13 @@
 ﻿<div class="pageHeader">
     <div class="main">
-        @if (ViewBag.MailSent)
+        @if (ViewBag.ConfirmMailSent && ViewBag.RequestMailSent)
         {
-            <h1>Order has been submitted for review.</h1>
+            <p>Order ID: @(ViewBag.RequestID) has been submitted for review.</p>
+        }
+        else if (ViewBag.RequestMailSent)
+        {
+            <p>Order ID: @(ViewBag.RequestID) has been submitted for review. However, the confirmation email failed on send to your provided address. Please save your Order ID for future references.</p>
+            <p>If any changes are necessary to your provided email address, please email: <a href="mailto:NightwarpComputers@outlook.com">NightwarpComputers@outlook.com</a>.</p>
         }
         else
         {
