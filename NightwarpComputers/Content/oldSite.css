@@ -150,6 +150,14 @@ li {
     padding: 10px;
 }
 
+[readonly] {
+    border: none;
+    background-color: #4d4d4d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: inherit;
+}
+
 .submit {
     background-color: #707070;
     color: #ffffff;

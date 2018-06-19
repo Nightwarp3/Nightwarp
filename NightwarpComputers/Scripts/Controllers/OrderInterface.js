@@ -1,10 +1,24 @@
 ﻿var OrderInterface = function ($scope, $location) {
 
     $scope.message = "PC Builder: Order Form";
-    $scope.contactPref = "";
     $scope.orderSubmitted = false;
 
     $scope.reviewOrder = function () {
+        setupInputEnums();
+        $scope.orderData = buildOrderData();
+        $scope.orderReview = true;
+    };
+
+    $scope.editOrder = function () {
+        $scope.orderReview = false;
+    };
+
+    $scope.sendOrder = function () {
+        $location.path("/Submit/" + $scope.orderData);
+    };
+
+    var setupInputEnums = function () {
+        // $scope.contactPref
         if ($scope.emailPref && !$scope.phonePref) {
             $scope.contactPref = "Email";
         }
@@ -14,16 +28,36 @@
         else {
             $scope.contactPref = "Either";
         }
-        $scope.orderReview = true;
-    };
 
-    $scope.editOrder = function () {
-        $scope.orderReview = false;
-    };
+        // $scope.typeBuild
+        if ($scope.buildType == "orderOnly") {
+            $scope.typeBuild = "Order Only";
+        }
+        else if ($scope.buildType == "buildOnly") {
+            $scope.typeBuild = "Build Only";
+        }
+        else {
+            $scope.typeBuild = "Order and Build";
+        }
 
-    $scope.sendOrder = function () {
-        var orderData = buildOrderData();
-        $location.path("/Submit/" + orderData);
+        // $scope.typeDelivery
+        if ($scope.deliveryType == "ship") {
+            $scope.typeDelivery = "Ship";
+        }
+        else {
+            $scope.typeDelivery = "Pickup";
+        }
+
+        // $scope.partPreferences
+        if ($scope.partPreference == "preferences") {
+            $scope.partPreferences = "Select Preferences";
+        }
+        else if ($scope.partPreference == "noPreference") {
+            $scope.partPreferences = "No Preferences";
+        }
+        else {
+            $scope.partPreferences = "Upload Parts List";
+        }
     };
 
     var buildOrderData = function () {
@@ -53,16 +87,16 @@
             $scope.name,
             $scope.email,
             $scope.contactPref,
-            $scope.buildType,
+            $scope.typeBuild,
             $scope.useType,
             $scope.priceLimit,
-            $scope.deliveryType,
+            $scope.typeDelivery,
             $scope.streetAddress1,
             $scope.streetAddress2,
             $scope.city,
             $scope.state,
             $scope.zip,
-            $scope.partPreference,
+            $scope.partPreferences,
             $scope.processorType,
             $scope.processorModel,
             $scope.motherboard,
