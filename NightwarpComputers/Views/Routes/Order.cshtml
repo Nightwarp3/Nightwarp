@@ -49,10 +49,10 @@
     </div>
     <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
             <label class="radio" style="grid-column: 1 / span 2;">
-                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship
+                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship to You
             </label>
             <label class="radio" style="grid-column: 3 / span 2;">
-                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup
+                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup in Person
             </label>
     </div>
     <div class="grid" ng-show="deliveryType == 'ship' || buildType == 'orderOnly'">
@@ -67,7 +67,7 @@
         </div>
         <div>Street Address 2:</div>
         <div>
-            <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="streetAddress2" placeholder="(Optional)" ng-model="streetAddress2" />
+            <input type="text" id="streetAddress2" placeholder="(Optional)" ng-model="streetAddress2" />
         </div>
         <div>State:</div>
         <div>
@@ -134,14 +134,18 @@
     <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
         <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
         <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="upload" ng-model="partPreference">Upload Parts List
+            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="upload" ng-model="partPreference">Parts List Link
         </label>
         <label class="radio">
             <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="preferences" ng-model="partPreference">Select Preferences
         </label>
         <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="noPreference" ng-model="partPreference">No Preferences
+            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="noPreference" ng-model="partPreference">Builder's Choice
         </label>
+    </div>
+    <div class="grid" ng-show="partPreference == 'upload'">
+        <div>Link to Parts List</div>
+        <input type="url" ng-required="partPreference == 'upload'" name="partsList" placeholder="(Amazon, Newegg, etc. list)" ng-model="partsListLink" />
     </div>
     <div class="grid" ng-show="partPreference == 'preferences'">
         <div>Processor Type:</div>

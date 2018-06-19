@@ -63,7 +63,7 @@ namespace NightwarpComputers.Content
         {
             SmtpClient client = new SmtpClient("smtp.office365.com", 587)
             {
-                Credentials = new NetworkCredential("NightwarpComputers@outlook.com", password),
+                Credentials = new NetworkCredential("NightwarpComputers@outlook.com", Environment.GetEnvironmentVariable("APPSETTING_EMAILPASSWORD")),
                 EnableSsl = true
             };
 

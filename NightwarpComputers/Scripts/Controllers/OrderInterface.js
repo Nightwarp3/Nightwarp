@@ -43,10 +43,10 @@
 
         // $scope.typeDelivery
         if ($scope.deliveryType == "ship") {
-            $scope.typeDelivery = "Ship";
+            $scope.typeDelivery = "Ship To You";
         }
         else {
-            $scope.typeDelivery = "Pickup";
+            $scope.typeDelivery = "Pickup in Person";
         }
 
         // $scope.partPreferences
@@ -54,10 +54,10 @@
             $scope.partPreferences = "Select Preferences";
         }
         else if ($scope.partPreference == "noPreference") {
-            $scope.partPreferences = "No Preferences";
+            $scope.partPreferences = "Builder's Choice";
         }
         else {
-            $scope.partPreferences = "Upload Parts List";
+            $scope.partPreferences = "Link to Parts List";
         }
     };
 
@@ -76,6 +76,7 @@
             "State: ",
             "Zip: ",
             "Part Preferences: ",
+            "Parts List Link: ",
             "Processor Type: ",
             "Processor Model: ",
             "Motherboard: ",
@@ -98,6 +99,7 @@
             $scope.state,
             $scope.zip,
             $scope.partPreferences,
+            $scope.partsListLink,
             $scope.processorType,
             $scope.processorModel,
             $scope.motherboard,
