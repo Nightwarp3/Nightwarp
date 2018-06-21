@@ -1,3 +1,74 @@
-﻿.mainContent {
-    margin-top: 60px;
+﻿body {
+    background-color: #4d4d4d;
+    color: #ffffff;
+}
+
+li {
+    font-size: 15px;
+}
+
+.menu {
+    width: 80%;
+    padding: 0;
+    float: none;
+    margin: 0 auto;
+    background-color: #352929;
+    border: 2px hidden;
+    border-radius: 8px;
+}
+
+    .menu > a {
+        font-size: 20px;
+        padding: 15px;
+        color: #ffffff;
+        display: inline-block;
+        text-decoration: none;
+        border: 1px hidden;
+        border-radius: 8px;
+    }
+
+        .menu > a:hover {
+            font-weight: bold;
+            background-color: #4f3d3d;
+        }
+
+.sectionHeading {
+    font-style: italic;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+.subHeading {
+    font-style: italic;
+    font-size: 17px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+.pageHeader {
+    font-weight: bold;
+    font-size: 30px;
+    font: Cambria;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.textImg {
+    height: auto;
+    width: 255px;
+    max-width: 100%;
+    float: left;
+    padding: 10px;
+}
+
+.submit {
+    background-color: #707070;
+    color: #ffffff;
+}
+
+.radio {
+    margin: 15px;
 }

@@ -1,242 +1,246 @@
-﻿<div class="pageHeader">{{message}}</div>
+﻿<div class="row" ng-view>
+    <aside class="col-sm-2"></aside>
+    <section class="col-sm-10">
+        <h1 class="pageHeader">{{message}}</h1>
 
-<form class="main" name="orderRequest" ng-hide="orderReview" ng-submit="reviewOrder()">
-    <div class="sectionHeading">Contact Information</div>
-    <div class="grid">
-        <div>First and Last Name:</div>
-        <div>
-            <input type="text" id="name" required ng-model="name" />
-        </div>
-        <div>Phone Number:</div>
-        <div>
-            <input type="text" id="phone" placeholder="(Optional)" pattern="\d{3}-\d{3}-\d{4}" ng-model="phone" />
-        </div>
-        <div>Email Address:</div>
-        <div>
-            <input type="email" id="email" required ng-model="email" />
-        </div>
-        <div>Contact Method Preference:</div>
-        <div>
-            <input type="checkbox" id="emailContact" value="Email" ngTrueValue="Email" ng-model="emailPref" />Email
-            <input type="checkbox" id="phoneContact" value="Phone" ngTrueValue="Phone" ng-model="phonePref" />Phone
-        </div>
-    </div>
-    <div class="sectionHeading">Order Information</div>
-    <div class="grid">
-        <label class="radio">
-            <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="buildType">Order Only
-        </label>
-        <label class="radio">
-            <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="buildType">Build Only
-        </label>
-        <label class="radio">
-            <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="buildType">Order and Build
-        </label>
-    </div>
-    <div class="grid" ng-show="buildType == 'orderOnly' || buildType == 'orderBuild'">
-        <div>Usage Expectation:</div>
-        <div>
-            <select ng-model="useType">
-                <option value="Gaming">Gaming</option>
-                <option value="Basic, Every Day Use">Basic, Every Day Use</option>
-                <option value="Audio/Video Production">Audio/Video Production</option>
-            </select>
-        </div>
-        <div>Price Limit:</div>
-        <div>
-            <input type="text" id="priceLimit" ng-required="buildType == 'orderOnly' || buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="priceLimit" />
-        </div>
-    </div>
-    <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
-        <label class="radio" style="grid-column: 1 / span 2;">
-            <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship to You
-        </label>
-        <label class="radio" style="grid-column: 3 / span 2;">
-            <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup in Person
-        </label>
-    </div>
-    <div class="grid" ng-show="deliveryType == 'ship' || buildType == 'orderOnly'">
-        <div class="sectionHeading" style="grid-column: 1 / span 4;">Shipping Information</div>
-        <div>Street Address 1:</div>
-        <div>
-            <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="address" ng-model="streetAddress1" />
-        </div>
-        <div>City:</div>
-        <div>
-            <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="city" ng-model="city" />
-        </div>
-        <div>Street Address 2:</div>
-        <div>
-            <input type="text" id="streetAddress2" placeholder="(Optional)" ng-model="streetAddress2" />
-        </div>
-        <div>State:</div>
-        <div>
-            <select ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="state" ng-model="state">
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="DE">DE</option>
-                <option value="DC">DC</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-            </select>
-        </div>
-        <div style="grid-column: 1 / span 2; text-align: right;">Zip:</div>
-        <div style="grid-column: 3 / span 2;">
-            <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="zip" ng-maxlength="5" ng-model="zip" />
-        </div>
-    </div>
-    <br />
-    <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
-        <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
-        <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="upload" ng-model="partPreference">Parts List Link
-        </label>
-        <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="preferences" ng-model="partPreference">Select Preferences
-        </label>
-        <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="noPreference" ng-model="partPreference">Builder's Choice
-        </label>
-    </div>
-    <div class="grid" ng-show="partPreference == 'upload'">
-        <div>Link to Parts List</div>
-        <input type="url" ng-required="partPreference == 'upload'" name="partsList" placeholder="(Amazon, Newegg, etc. list)" ng-model="partsListLink" />
-    </div>
-    <div class="grid" ng-show="partPreference == 'preferences'">
-        <div>Processor Type:</div>
-        <div>
-            <select name="processorType" ng-model="processorType">
-                <option value="AMD">AMD (AM4 socket)</option>
-                <option value="Intel">Intel (LGA 1151)</option>
-            </select>
-        </div>
-        <div>Processor Model:</div>
-        <div>
-            <select name="processorModel" ng-disabled="processorType != 'AMD' && processorType != 'Intel'" ng-model="processorModel">
-                <option ng-show="processorType == 'AMD'" value="Ryzen 3">Ryzen 3</option>
-                <option ng-show="processorType == 'AMD'" value="Ryzen 5">Ryzen 5</option>
-                <option ng-show="processorType == 'AMD'" value="Ryzen 7">Ryzen 7</option>
-                <option ng-show="processorType == 'AMD'" value="Ryzen Threadripper">Ryzen Threadripper</option>
-                <option ng-show="processorType == 'Intel'" value="i3">i3</option>
-                <option ng-show="processorType == 'Intel'" value="i5">i5</option>
-                <option ng-show="processorType == 'Intel'" value="i7">i7</option>
-                <option ng-show="processorType == 'Intel'" value="i9">i9</option>
-            </select>
-        </div>
-        <div>Motherboard Options:</div>
-        <div>
-            <select name="motherboard" ng-model="motherboard">
-                <option value="ASUS">ASUS</option>
-                <option value="Gigabyte">Gigabyte</option>
-                <option value="MSI">MSI</option>
-                <option value="Any (Lowest Price)">Any (Lowest Price)</option>
-                <option value="Any (Highest Price)">Any (Highest Price)</option>
-            </select>
-        </div>
-        <div>Graphics Options:</div>
-        <div>
-            <select name="graphics" ng-model="graphics">
-                <option value="integrated">Integrated (Lowest Price)</option>
-                <option value="Radeon">Radeon</option>
-                <option value="GeForce">GeForce</option>
-            </select>
-        </div>
-        <div>Color Preference:</div>
-        <div>
-            <input type="text" placeholder="(Optional)" id="colorPref" ng-model="colorPref" />
-        </div>
-        <div class="sectionHeading" style="grid-column: 1 / span 4; font-weight: bold; border: none;">Memory:</div>
-        <div>Quantity of Sticks:</div>
-        <div>
-            <select name="numOfSticks" ng-model="numOfSticks">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
-        <div>Memory per Stick:</div>
-        <div>
-            <select name="memPerStick" ng-model="memPerStick">
-                <option value="1">1 GB</option>
-                <option value="2">2 GB</option>
-                <option value="4">4 GB</option>
-                <option value="8">8 GB</option>
-                <option value="16">16 GB</option>
-                <option value="32">32 GB</option>
-            </select>
-        </div>
-    </div>
-    <input class="submit" type="submit" ng-hide="orderReview" value="Review Order" />
-</form>
+        <form name="orderRequest" ng-hide="orderReview" ng-submit="reviewOrder()">
+            <div class="sectionHeading">Contact Information</div>
+            <div>
+                <div>First and Last Name:</div>
+                <div>
+                    <input type="text" id="name" required ng-model="name" />
+                </div>
+                <div>Phone Number:</div>
+                <div>
+                    <input type="text" id="phone" placeholder="(Optional)" pattern="\d{3}-\d{3}-\d{4}" ng-model="phone" />
+                </div>
+                <div>Email Address:</div>
+                <div>
+                    <input type="email" id="email" required ng-model="email" />
+                </div>
+                <div>Contact Method Preference:</div>
+                <div>
+                    <input type="checkbox" id="emailContact" value="Email" ngTrueValue="Email" ng-model="emailPref" />Email
+                    <input type="checkbox" id="phoneContact" value="Phone" ngTrueValue="Phone" ng-model="phonePref" />Phone
+                </div>
+            </div>
+            <div class="sectionHeading">Order Information</div>
+            <div>
+                <label class="radio">
+                    <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="buildType">Order Only
+                </label>
+                <label class="radio">
+                    <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="buildType">Build Only
+                </label>
+                <label class="radio">
+                    <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="buildType">Order and Build
+                </label>
+            </div>
+            <div ng-show="buildType == 'orderOnly' || buildType == 'orderBuild'">
+                <div>Usage Expectation:</div>
+                <div>
+                    <select ng-model="useType">
+                        <option value="Gaming">Gaming</option>
+                        <option value="Basic, Every Day Use">Basic, Every Day Use</option>
+                        <option value="Audio/Video Production">Audio/Video Production</option>
+                    </select>
+                </div>
+                <div>Price Limit:</div>
+                <div>
+                    <input type="text" id="priceLimit" ng-required="buildType == 'orderOnly' || buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="priceLimit" />
+                </div>
+            </div>
+            <div ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
+                <label class="radio" style="grid-column: 1 / span 2;">
+                    <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship to You
+                </label>
+                <label class="radio" style="grid-column: 3 / span 2;">
+                    <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup in Person
+                </label>
+            </div>
+            <div ng-show="deliveryType == 'ship' || buildType == 'orderOnly'">
+                <div class="sectionHeading" style="grid-column: 1 / span 4;">Shipping Information</div>
+                <div>Street Address 1:</div>
+                <div>
+                    <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="address" ng-model="streetAddress1" />
+                </div>
+                <div>City:</div>
+                <div>
+                    <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="city" ng-model="city" />
+                </div>
+                <div>Street Address 2:</div>
+                <div>
+                    <input type="text" id="streetAddress2" placeholder="(Optional)" ng-model="streetAddress2" />
+                </div>
+                <div>State:</div>
+                <div>
+                    <select ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="state" ng-model="state">
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AZ">AZ</option>
+                        <option value="AR">AR</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DE">DE</option>
+                        <option value="DC">DC</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="IA">IA</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="ME">ME</option>
+                        <option value="MD">MD</option>
+                        <option value="MA">MA</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MS">MS</option>
+                        <option value="MO">MO</option>
+                        <option value="MT">MT</option>
+                        <option value="NE">NE</option>
+                        <option value="NV">NV</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NY">NY</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WV">WV</option>
+                        <option value="WI">WI</option>
+                        <option value="WY">WY</option>
+                    </select>
+                </div>
+                <div style="grid-column: 1 / span 2; text-align: right;">Zip:</div>
+                <div style="grid-column: 3 / span 2;">
+                    <input type="text" ng-required="deliveryType == 'ship' || buildType == 'orderOnly'" id="zip" ng-maxlength="5" ng-model="zip" />
+                </div>
+            </div>
+            <br />
+            <div ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
+                <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
+                <label class="radio">
+                    <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="upload" ng-model="partPreference">Parts List Link
+                </label>
+                <label class="radio">
+                    <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="preferences" ng-model="partPreference">Select Preferences
+                </label>
+                <label class="radio">
+                    <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="noPreference" ng-model="partPreference">Builder's Choice
+                </label>
+            </div>
+            <div ng-show="partPreference == 'upload'">
+                <div>Link to Parts List</div>
+                <input type="url" ng-required="partPreference == 'upload'" name="partsList" placeholder="(Amazon, Newegg, etc. list)" ng-model="partsListLink" />
+            </div>
+            <div ng-show="partPreference == 'preferences'">
+                <div>Processor Type:</div>
+                <div>
+                    <select name="processorType" ng-model="processorType">
+                        <option value="AMD">AMD (AM4 socket)</option>
+                        <option value="Intel">Intel (LGA 1151)</option>
+                    </select>
+                </div>
+                <div>Processor Model:</div>
+                <div>
+                    <select name="processorModel" ng-disabled="processorType != 'AMD' && processorType != 'Intel'" ng-model="processorModel">
+                        <option ng-show="processorType == 'AMD'" value="Ryzen 3">Ryzen 3</option>
+                        <option ng-show="processorType == 'AMD'" value="Ryzen 5">Ryzen 5</option>
+                        <option ng-show="processorType == 'AMD'" value="Ryzen 7">Ryzen 7</option>
+                        <option ng-show="processorType == 'AMD'" value="Ryzen Threadripper">Ryzen Threadripper</option>
+                        <option ng-show="processorType == 'Intel'" value="i3">i3</option>
+                        <option ng-show="processorType == 'Intel'" value="i5">i5</option>
+                        <option ng-show="processorType == 'Intel'" value="i7">i7</option>
+                        <option ng-show="processorType == 'Intel'" value="i9">i9</option>
+                    </select>
+                </div>
+                <div>Motherboard Options:</div>
+                <div>
+                    <select name="motherboard" ng-model="motherboard">
+                        <option value="ASUS">ASUS</option>
+                        <option value="Gigabyte">Gigabyte</option>
+                        <option value="MSI">MSI</option>
+                        <option value="Any (Lowest Price)">Any (Lowest Price)</option>
+                        <option value="Any (Highest Price)">Any (Highest Price)</option>
+                    </select>
+                </div>
+                <div>Graphics Options:</div>
+                <div>
+                    <select name="graphics" ng-model="graphics">
+                        <option value="integrated">Integrated (Lowest Price)</option>
+                        <option value="Radeon">Radeon</option>
+                        <option value="GeForce">GeForce</option>
+                    </select>
+                </div>
+                <div>Color Preference:</div>
+                <div>
+                    <input type="text" placeholder="(Optional)" id="colorPref" ng-model="colorPref" />
+                </div>
+                <div class="subHeading" style="grid-column: 1 / span 4; font-weight: bold; border: none;">Memory:</div>
+                <div>Quantity of Sticks:</div>
+                <div>
+                    <select name="numOfSticks" ng-model="numOfSticks">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div>Memory per Stick:</div>
+                <div>
+                    <select name="memPerStick" ng-model="memPerStick">
+                        <option value="1">1 GB</option>
+                        <option value="2">2 GB</option>
+                        <option value="4">4 GB</option>
+                        <option value="8">8 GB</option>
+                        <option value="16">16 GB</option>
+                        <option value="32">32 GB</option>
+                    </select>
+                </div>
+            </div>
+            <input class="submit" type="submit" ng-hide="orderReview" value="Review Order" />
+        </form>
 
-<div name="orderReview" class="main" ng-show="orderReview">
-    <div class="sectionHeading">Order Review</div>
-    <div class="row">
-        <div ng-repeat="item in orderData" style="text-align: left;">
-            {{item}}
+        <div name="orderReview" ng-show="orderReview">
+            <div class="sectionHeading">Order Review</div>
+            <div>
+                <div ng-repeat="item in orderData" style="text-align: left;">
+                    {{item}}
+                </div>
+            </div>
+            <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
+            <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
         </div>
-    </div>
-    <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
-    <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
-</div>
-
-<div name="feeBreakdown" class="fees">
-    <div class="sectionHeading">Fee Breakdown:</div>
-    <div class="feeGrid">
-        <div style="font-style: italic;">
-            <div>Order Fee:</div>
-            <div>Build Fee:</div>
-        </div>
+    </section>
+    <aside name="feeBreakdown" class="col-sm-2">
+        <div class="sectionHeading">Fee Breakdown:</div>
         <div>
-            <div>${{fees.orderFee}}</div>
-            <div>${{fees.buildFee}}</div>
+            <div style="font-style: italic;">
+                <div>Order Fee:</div>
+                <div>Build Fee:</div>
+            </div>
+            <div>
+                <div>${{fees.orderFee}}</div>
+                <div>${{fees.buildFee}}</div>
+            </div>
         </div>
-    </div>
-    <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
+        <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
+    </aside>
 </div>
