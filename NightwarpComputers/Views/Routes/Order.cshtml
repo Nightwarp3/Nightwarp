@@ -24,13 +24,13 @@
     <div class="sectionHeading">Order Information</div>
     <div class="grid">
         <label class="radio">
-            <input type="radio" name="buildType" required value="orderOnly" ngClick="orderOnly" ng-model="buildType">Order Only
+            <input type="radio" name="buildType" required value="orderOnly" ng-Click="recalculateOrder()" ng-model="buildType">Order Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" required value="buildOnly" ngClick="buildOnly" ng-model="buildType">Build Only
+            <input type="radio" name="buildType" required value="buildOnly" ng-Click="recalculateOrder()" ng-model="buildType">Build Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" required value="orderBuild" ngClick="orderBuild" ng-model="buildType">Order and Build
+            <input type="radio" name="buildType" required value="orderBuild" ng-Click="recalculateOrder()" ng-model="buildType">Order and Build
         </label>
     </div>
     <div class="grid" ng-show="buildType == 'orderOnly' || buildType == 'orderBuild'">
@@ -48,12 +48,12 @@
         </div>
     </div>
     <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
-            <label class="radio" style="grid-column: 1 / span 2;">
-                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship to You
-            </label>
-            <label class="radio" style="grid-column: 3 / span 2;">
-                <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup in Person
-            </label>
+        <label class="radio" style="grid-column: 1 / span 2;">
+            <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="ship" ng-model="deliveryType">Ship to You
+        </label>
+        <label class="radio" style="grid-column: 3 / span 2;">
+            <input type="radio" name="deliveryType" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" value="pickup" ng-model="deliveryType">Pickup in Person
+        </label>
     </div>
     <div class="grid" ng-show="deliveryType == 'ship' || buildType == 'orderOnly'">
         <div class="sectionHeading" style="grid-column: 1 / span 4;">Shipping Information</div>
@@ -224,4 +224,16 @@
     </div>
     <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
     <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
+</div>
+
+<div name="feeBreakdown" class="fees">
+    <div ng-show="fees.orderFee > 0">
+        <i>Order Fee: </i><b>{{fees.orderFee}}</b>
+    </div>
+    <div ng-show="fees.buildFee > 0">
+        <i>Build Fee: </i><b>{{fees.buildFee}}</b>
+    </div>
+    <div>
+        <b>FEE TOTAL: {{feeTotal}}</b>
+    </div>
 </div>

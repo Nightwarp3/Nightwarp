@@ -2,6 +2,23 @@
 
     $scope.message = "PC Builder: Order Form";
     $scope.orderSubmitted = false;
+    $scope.fees = {
+        orderFee: 0,
+        buildFee: 0,
+        calculateFee: function () {
+            return this.orderFee + this.buildFee;
+        }
+    };
+
+    $scope.recalculateOrder = function () {
+        if ($scope.buildType == "orderOnly" || $scope.buildType == "orderBuild") {
+            $scope.fees.orderFee = 50.00;
+        }
+        if ($scope.buildType == "buildOnly" || $scope.buildType == "orderBuild") {
+            $scope.fees.buildFee = 50.00;
+        }
+        $scope.feeTotal = $scope.fees.calculateFee();
+    };
 
     $scope.reviewOrder = function () {
         setupInputEnums();
@@ -112,7 +129,7 @@
         var array = [];
 
         for (i = 0; i < labelArray.length; i++) {
-            if (valueArray[i] != undefined) {
+            if (valueArray[i] !== undefined) {
                 array.push(labelArray[i] + valueArray[i]);
             };
         };
