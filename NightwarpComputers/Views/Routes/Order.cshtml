@@ -9,7 +9,7 @@
         </div>
         <div>Phone Number:</div>
         <div>
-            <input type="text" id="phone" placeholder="(Optional)" ng-model="phone" />
+            <input type="text" id="phone" placeholder="(Optional)" pattern="\d{3}-\d{3}-\d{4}" ng-model="phone" />
         </div>
         <div>Email Address:</div>
         <div>
@@ -24,13 +24,13 @@
     <div class="sectionHeading">Order Information</div>
     <div class="grid">
         <label class="radio">
-            <input type="radio" name="buildType" required value="orderOnly" ng-Click="recalculateOrder()" ng-model="buildType">Order Only
+            <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="buildType">Order Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" required value="buildOnly" ng-Click="recalculateOrder()" ng-model="buildType">Build Only
+            <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="buildType">Build Only
         </label>
         <label class="radio">
-            <input type="radio" name="buildType" required value="orderBuild" ng-Click="recalculateOrder()" ng-model="buildType">Order and Build
+            <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="buildType">Order and Build
         </label>
     </div>
     <div class="grid" ng-show="buildType == 'orderOnly' || buildType == 'orderBuild'">
@@ -44,7 +44,7 @@
         </div>
         <div>Price Limit:</div>
         <div>
-            <input type="text" id="priceLimit" ng-required="buildType == 'orderOnly' || buildType == 'orderBuild'" ng-model="priceLimit" />
+            <input type="text" id="priceLimit" ng-required="buildType == 'orderOnly' || buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="priceLimit" />
         </div>
     </div>
     <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
@@ -134,13 +134,13 @@
     <div class="grid" ng-show="buildType == 'buildOnly' || buildType == 'orderBuild'">
         <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
         <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="upload" ng-model="partPreference">Parts List Link
+            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="upload" ng-model="partPreference">Parts List Link
         </label>
         <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="preferences" ng-model="partPreference">Select Preferences
+            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="preferences" ng-model="partPreference">Select Preferences
         </label>
         <label class="radio">
-            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" name="partPreference" value="noPreference" ng-model="partPreference">Builder's Choice
+            <input type="radio" ng-required="buildType == 'buildOnly' || buildType == 'orderBuild'" ng-change="recalculateOrder()" name="partPreference" value="noPreference" ng-model="partPreference">Builder's Choice
         </label>
     </div>
     <div class="grid" ng-show="partPreference == 'upload'">
@@ -227,13 +227,16 @@
 </div>
 
 <div name="feeBreakdown" class="fees">
-    <div ng-show="fees.orderFee > 0">
-        <i>Order Fee: </i><b>{{fees.orderFee}}</b>
+    <div class="sectionHeading">Fee Breakdown:</div>
+    <div class="feeGrid">
+        <div style="font-style: italic;">
+            <div>Order Fee:</div>
+            <div>Build Fee:</div>
+        </div>
+        <div>
+            <div>${{fees.orderFee}}</div>
+            <div>${{fees.buildFee}}</div>
+        </div>
     </div>
-    <div ng-show="fees.buildFee > 0">
-        <i>Build Fee: </i><b>{{fees.buildFee}}</b>
-    </div>
-    <div>
-        <b>FEE TOTAL: {{feeTotal}}</b>
-    </div>
+    <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
 </div>

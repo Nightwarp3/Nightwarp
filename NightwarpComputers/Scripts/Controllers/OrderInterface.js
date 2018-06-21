@@ -2,19 +2,22 @@
 
     $scope.message = "PC Builder: Order Form";
     $scope.orderSubmitted = false;
+    $scope.feeTotal = 0.00;
     $scope.fees = {
-        orderFee: 0,
-        buildFee: 0,
+        orderFee: 0.00,
+        buildFee: 0.00,
         calculateFee: function () {
             return this.orderFee + this.buildFee;
         }
     };
 
     $scope.recalculateOrder = function () {
-        if ($scope.buildType == "orderOnly" || $scope.buildType == "orderBuild") {
+        $scope.fees.orderFee = 0.00;
+        $scope.fees.buildFee = 0.00;
+        if (($scope.buildType == "orderOnly" || $scope.buildType == "orderBuild") && $scope.partPreference != "upload") {
             $scope.fees.orderFee = 50.00;
         }
-        if ($scope.buildType == "buildOnly" || $scope.buildType == "orderBuild") {
+        if (($scope.buildType == "buildOnly" || $scope.buildType == "orderBuild")) {
             $scope.fees.buildFee = 50.00;
         }
         $scope.feeTotal = $scope.fees.calculateFee();
@@ -100,7 +103,8 @@
             "Qty of Memory: ",
             "Size: ",
             "Graphics: ",
-            "Color Preference: "
+            "Color Preference: ",
+            "Fee Total: "
         ];
         var valueArray = [
             $scope.name,
@@ -123,7 +127,8 @@
             $scope.numOfSticks,
             $scope.memPerStick,
             $scope.graphics,
-            $scope.colorPref
+            $scope.colorPref,
+            $scope.feeTotal
         ];
 
         var array = [];
