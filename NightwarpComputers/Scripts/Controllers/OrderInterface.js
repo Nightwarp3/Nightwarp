@@ -1,6 +1,6 @@
 ﻿var OrderInterface = function ($scope, $location) {
 
-    $scope.message = "PC Builder: Order Form";
+    $scope.formData = {};
     $scope.orderSubmitted = false;
     $scope.feeTotal = 0.00;
     $scope.fees = {
@@ -14,10 +14,10 @@
     $scope.recalculateOrder = function () {
         $scope.fees.orderFee = 0.00;
         $scope.fees.buildFee = 0.00;
-        if (($scope.buildType == "orderOnly" || $scope.buildType == "orderBuild") && $scope.partPreference != "upload") {
+        if (($scope.formData.buildType == "orderOnly" || $scope.formData.buildType == "orderBuild") && $scope.formData.partPreference != "upload") {
             $scope.fees.orderFee = 50.00;
         }
-        if (($scope.buildType == "buildOnly" || $scope.buildType == "orderBuild")) {
+        if (($scope.formData.buildType == "buildOnly" || $scope.formData.buildType == "orderBuild")) {
             $scope.fees.buildFee = 50.00;
         }
         $scope.feeTotal = $scope.fees.calculateFee();
@@ -25,7 +25,6 @@
 
     $scope.reviewOrder = function () {
         setupInputEnums();
-        $scope.orderData = buildOrderData();
         $scope.orderReview = true;
     };
 
@@ -35,10 +34,10 @@
 
     $scope.sendOrder = function () {
         $scope.orderSubmitted = true;
-        $location.path("/Submit/" + $scope.orderData);
+        $location.path("/Submit/" + $scope.formData);
     };
 
-    var setupInputEnums = function () {
+    var setupInputNames = function () {
         // $scope.contactPref
         if ($scope.emailPref && !$scope.phonePref) {
             $scope.contactPref = "Email";
@@ -80,67 +79,6 @@
             $scope.partPreferences = "Link to Parts List";
         }
     };
-
-    var buildOrderData = function () {
-        var labelArray = [
-            "Name: ",
-            "Email: ",
-            "Contact Preference: ",
-            "Build Type: ",
-            "Use Type: ",
-            "Price Limit: ",
-            "Delivery Type: ",
-            "Street Address 1: ",
-            "Street Address 2: ",
-            "City: ",
-            "State: ",
-            "Zip: ",
-            "Part Preferences: ",
-            "Parts List Link: ",
-            "Processor Type: ",
-            "Processor Model: ",
-            "Motherboard: ",
-            "Qty of Memory: ",
-            "Size: ",
-            "Graphics: ",
-            "Color Preference: ",
-            "Fee Total: "
-        ];
-        var valueArray = [
-            $scope.name,
-            $scope.email,
-            $scope.contactPref,
-            $scope.typeBuild,
-            $scope.useType,
-            $scope.priceLimit,
-            $scope.typeDelivery,
-            $scope.streetAddress1,
-            $scope.streetAddress2,
-            $scope.city,
-            $scope.state,
-            $scope.zip,
-            $scope.partPreferences,
-            $scope.partsListLink,
-            $scope.processorType,
-            $scope.processorModel,
-            $scope.motherboard,
-            $scope.numOfSticks,
-            $scope.memPerStick,
-            $scope.graphics,
-            $scope.colorPref,
-            $scope.feeTotal
-        ];
-
-        var array = [];
-
-        for (i = 0; i < labelArray.length; i++) {
-            if (valueArray[i] !== undefined) {
-                array.push(labelArray[i] + valueArray[i]);
-            };
-        };
-
-        return array;
-    }
 };
 
 OrderInterface.$inject = ['$scope', '$location']
