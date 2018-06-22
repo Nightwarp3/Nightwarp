@@ -1,5 +1,6 @@
 ﻿var OrderInterface = function ($scope, $location) {
 
+    $scope.message = "Nightwarp Computers - Order Request";
     $scope.formData = {};
     $scope.orderSubmitted = false;
     $scope.feeTotal = 0.00;
@@ -24,7 +25,7 @@
     };
 
     $scope.reviewOrder = function () {
-        setupInputEnums();
+        setupInputNames();
         $scope.orderReview = true;
     };
 

@@ -9,8 +9,6 @@ li {
 
 .menu {
     background-color: #352929;
-    border: 2px hidden;
-    border-radius: 8px;
 }
 
     .menu > a {
@@ -28,12 +26,24 @@ li {
             background-color: #4f3d3d;
         }
 
+.mainImage {
+    text-align: center;
+}
+
+.feeBreakdown {
+    position: sticky;
+    top: 50%;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
 .sectionHeading {
     font-style: italic;
     font-size: 20px;
     text-align: left;
     border-bottom: 1px solid black;
     padding: 5px;
+    margin: 15px;
 }
 
 .subHeading {
@@ -63,8 +73,4 @@ li {
 .submit {
     background-color: #707070;
     color: #ffffff;
-}
-
-.radio {
-    margin: 15px;
 }

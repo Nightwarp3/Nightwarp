@@ -1,6 +1,15 @@
-﻿<div class="row" ng-view>
-    <aside class="col-sm-2">
-        <img src="" title="Oops..." />
+﻿<div class="row">
+    <aside name="feeBreakdown" class="col-sm-2 feeBreakdown">
+        <div class="subHeading">Fee Breakdown:</div>
+        <div>
+            <i>Order Fee:</i>
+            <div>${{fees.orderFee}}</div>
+        </div>
+        <div>
+            <i>Build Fee:</i>
+            <div>${{fees.buildFee}}</div>
+        </div>
+        <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
     </aside>
     <section class="col-sm-8">
         <h1 class="pageHeader">{{message}}</h1>
@@ -10,40 +19,42 @@
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">First and Last Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" id="name" required ng-model="formData.name" />
+                    <input type="text" class="form-control" id="name" required ng-model="formData.name" />
                 </div>
                 <label for="phone" class="col-sm-2 control-label">Phone Number:</label>
                 <div class="col-sm-4">
-                    <input type="text" id="phone" placeholder="(Optional)" pattern="1?-?(\d{3}-?){2}\d{4}" title="#-###-###-#### \r\n ###-###-####" ng-model="formData.phone" />
+                    <input type="text" class="form-control" id="phone" placeholder="(Optional)" pattern="1?-?(\d{3}-?){2}\d{4}" title="#-###-###-#### \r\n ###-###-####" ng-model="formData.phone" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">Email Address:</label>
                 <div class="col-sm-4">
-                    <input type="email" id="email" required ng-model="formData.email" />
+                    <input type="email" class="form-control" id="email" required ng-model="formData.email" />
                 </div>
                 <label for="contactPref" class="col-sm-2 control-label">Contact Method Preference:</label>
-                <div class="col-sm-4">
+                <label class="col-sm-2">
                     <input type="checkbox" id="contactPref" value="Email" ngTrueValue="Email" ng-model="formData.emailPref" />Email
+                </label>
+                <label class="col-sm-2">
                     <input type="checkbox" id="contactPref" value="Phone" ngTrueValue="Phone" ng-model="formData.phonePref" />Phone
-                </div>
+                </label>
             </div>
             <div class="sectionHeading">Order Information</div>
             <div class="form-group">
-                <label class="radio col-sm-4">
+                <label class="col-sm-4">
                     <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Order Only
                 </label>
-                <label class="radio col-sm-4">
+                <label class="col-sm-4">
                     <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Build Only
                 </label>
-                <label class="radio col-sm-4">
+                <label class="col-sm-4">
                     <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="formData.buildType">Order and Build
                 </label>
             </div>
             <div class="form-group" ng-show="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'">
                 <label for="useType" class="col-sm-2 control-label">Usage Expectation:</label>
                 <div class="col-sm-4">
-                    <select id="useType" ng-model="formData.useType">
+                    <select class="form-control" id="useType" ng-model="formData.useType">
                         <option value="Gaming">Gaming</option>
                         <option value="Basic, Every Day Use">Basic, Every Day Use</option>
                         <option value="Audio/Video Production">Audio/Video Production</option>
@@ -51,14 +62,14 @@
                 </div>
                 <label for="priceLimit" class="col-sm-2 control-label">Price Limit:</label>
                 <div class="col-sm-4">
-                    <input type="text" id="priceLimit" ng-required="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="formData.priceLimit" />
+                    <input type="text" class="form-control" id="priceLimit" ng-required="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="formData.priceLimit" />
                 </div>
             </div>
             <div class="form-group" ng-show="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'">
-                <label class="radio col-sm-5">
+                <label class="col-sm-5">
                     <input type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="ship" ng-model="formData.deliveryType">Ship to You
                 </label>
-                <label class="radio col-sm-5">
+                <label class="col-sm-5">
                     <input type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="pickup" ng-model="formData.deliveryType">Pickup in Person
                 </label>
             </div>
@@ -68,21 +79,21 @@
                 <div class="form-group">
                     <label for="address" class="col-sm-2 control-label">Street Address 1:</label>
                     <div class="col-sm-4">
-                        <input type="text" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="address" ng-model="formData.streetAddress1" />
+                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="address" ng-model="formData.streetAddress1" />
                     </div>
                     <label for="city" class="col-sm-2 control-label">City:</label>
                     <div class="col-sm-4">
-                        <input type="text" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="city" ng-model="formData.city" />
+                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="city" ng-model="formData.city" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="streetAddress2" class="col-sm-1 control-label">Street Address 2:</label>
                     <div class="col-sm-3">
-                        <input type="text" id="streetAddress2" placeholder="(Optional)" ng-model="formData.streetAddress2" />
+                        <input type="text" class="form-control" id="streetAddress2" placeholder="(Optional)" ng-model="formData.streetAddress2" />
                     </div>
                     <label for="state" class="col-sm-1 control-label">State:</label>
                     <div class="col-sm-3">
-                        <select ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="state" ng-model="formData.state">
+                        <select class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="state" ng-model="formData.state">
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AZ">AZ</option>
@@ -138,7 +149,7 @@
                     </div>
                     <label for="zip" class="col-sm-1 control-label">Zip:</label>
                     <div class="col-sm-3">
-                        <input type="text" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="zip" ng-maxlength="5" ng-model="formData.zip" />
+                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="zip" ng-maxlength="5" ng-model="formData.zip" />
                     </div>
                 </div>
             </div>
@@ -146,37 +157,37 @@
                 <br />
                 <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
                 <div class="form-group">
-                    <label class="radio col-sm-4">
+                    <label class="col-sm-4">
                         <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="upload" ng-model="formData.partPreference">Parts List Link
                     </label>
-                    <label class="radio col-sm-4">
+                    <label class="col-sm-4">
                         <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="preferences" ng-model="formData.partPreference">Select Preferences
                     </label>
-                    <label class="radio col-sm-4">
+                    <label class="col-sm-4">
                         <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="noPreference" ng-model="formData.partPreference">Builder's Choice
                     </label>
                 </div>
             </div>
-            <div ng-show="partPreference == 'upload'">
+            <div ng-show="formData.partPreference == 'upload'">
                 <div class="form-group">
                     <label for="partsList" class="col-sm-4">Link to Parts List</label>
                     <div class="col-sm-8">
-                        <input type="url" ng-required="partPreference == 'upload'" id="partsList" placeholder="(Amazon, Newegg, etc. list)" ng-model="formData.partsListLink" />
+                        <input type="url" class="form-control" ng-required="partPreference == 'upload'" id="partsList" placeholder="(Amazon, Newegg, etc. list)" ng-model="formData.partsListLink" />
                     </div>
                 </div>
             </div>
-            <div ng-show="partPreference == 'preferences'">
+            <div ng-show="formData.partPreference == 'preferences'">
                 <div class="form-group">
                     <label for="processorType" class="col-sm-2 control-label">Processor Type:</label>
                     <div class="col-sm-4">
-                        <select id="processorType" ng-model="formData.processorType">
+                        <select class="form-control" id="processorType" ng-model="formData.processorType">
                             <option value="AMD">AMD (AM4 socket)</option>
                             <option value="Intel">Intel (LGA 1151)</option>
                         </select>
                     </div>
                     <label for="processorModel" class="col-sm-2 control-label">Processor Model:</label>
                     <div class="col-sm-4">
-                        <select id="processorModel" ng-disabled="formData.processorType != 'AMD' && formData.processorType != 'Intel'" ng-model="formData.processorModel">
+                        <select class="form-control" id="processorModel" ng-disabled="formData.processorType != 'AMD' && formData.processorType != 'Intel'" ng-model="formData.processorModel">
                             <option ng-show="formData.processorType == 'AMD'" value="Ryzen 3">Ryzen 3</option>
                             <option ng-show="formData.processorType == 'AMD'" value="Ryzen 5">Ryzen 5</option>
                             <option ng-show="formData.processorType == 'AMD'" value="Ryzen 7">Ryzen 7</option>
@@ -191,7 +202,7 @@
                 <div class="form-group">
                     <label for="motherboard" class="col-sm-1 control-label">Motherboard Options:</label>
                     <div class="col-sm-3">
-                        <select id="motherboard" ng-model="formData.motherboard">
+                        <select class="form-control" id="motherboard" ng-model="formData.motherboard">
                             <option value="ASUS">ASUS</option>
                             <option value="Gigabyte">Gigabyte</option>
                             <option value="MSI">MSI</option>
@@ -201,7 +212,7 @@
                     </div>
                     <label for="graphics" class="col-sm-1 control-label">Graphics Options:</label>
                     <div class="col-sm-3">
-                        <select id="graphics" ng-model="formData.graphics">
+                        <select class="form-control" id="graphics" ng-model="formData.graphics">
                             <option value="integrated">Integrated (Lowest Price)</option>
                             <option value="Radeon">Radeon</option>
                             <option value="GeForce">GeForce</option>
@@ -209,14 +220,14 @@
                     </div>
                     <label for="colorPref" class="col-sm-1 control-label">Color Preference:</label>
                     <div class="col-sm-3">
-                        <input type="text" placeholder="(Optional)" id="colorPref" ng-model="formData.colorPref" />
+                        <input type="text" class="form-control" id="colorPref" placeholder="(Optional)" ng-model="formData.colorPref" />
                     </div>
                 </div>
                 <div class="subHeading col-sm-offset-5">Memory:</div>
                 <div class="form-group">
                     <label for="numOfSticks" class="col-sm-2 control-label">Quantity of Sticks:</label>
                     <div class="col-sm-2">
-                        <select id="numOfSticks" ng-model="formData.numOfSticks">
+                        <select class="form-control" id="numOfSticks" ng-model="formData.numOfSticks">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -225,7 +236,7 @@
                     </div>
                     <label for="memPerStick" class="col-sm-2 control-label">Memory per Stick:</label>
                     <div class="col-sm-4">
-                        <select name="memPerStick" ng-model="formData.memPerStick">
+                        <select class="form-control" id="memPerStick" ng-model="formData.memPerStick">
                             <option value="1">1 GB</option>
                             <option value="2">2 GB</option>
                             <option value="4">4 GB</option>
@@ -243,29 +254,18 @@
             </div>
         </form>
 
-        <!--<div name="orderReview" ng-show="orderReview">
+        <div name="orderReview" ng-show="orderReview">
             <div class="sectionHeading">Order Review</div>
             <div>
                 <div ng-repeat="item in formData" style="text-align: left;">
-                    
+                    {{item}}
                 </div>
             </div>
             <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
             <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
         </div>
-    </section>-->
-    <aside name="feeBreakdown" class="col-sm-2">
-        <div class="sectionHeading">Fee Breakdown:</div>
-        <div>
-            <div style="font-style: italic;">
-                <div>Order Fee:</div>
-                <div>Build Fee:</div>
-            </div>
-            <div>
-                <div>${{fees.orderFee}}</div>
-                <div>${{fees.buildFee}}</div>
-            </div>
-        </div>
-        <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
+    </section>
+    <aside class="col-sm-2">
+        <img class="textImg" src="https://lh3.googleusercontent.com/WL2oPTn3ejgiEsr6mTD59NQ5OaaD9DM2LofxcfAD__xNHMuyHYSqU51j0SgD_YfqETQchXRD2bL9xqKk4NW1nH1V2vA5eLDLapKT8Fg15jnMuu0vps8peu8Vzl1wGWMeJn6a1YgontCwdflakV-n7f3dvFvAaYF0Wtrc3cyMxpjetQlvA0KfnvrG9fnYEV6ENnFfgJ8nUv2q6N9LPJ98k6LdDZoDXP6DTOU_3L6ElCBQFnmUPnX1cxZ-JErlKCT4vxamrvjUE38-S2D8TizkYnPdgT8MJGEVRlpaMHYCs900x-cAEuiUcizkOnyswBCaD-vDDakjtqa4b79HGDEEva0hObEknaFow-aWOuCN8A0AKwzBNOB9wJlon-HC2RDrbSMjrPFyABg0R2mWN6uq6EVmguw1frN43LWtmzgtcTOPQiQBQu3pogZTwLRlcSjS1G5vpCyhCJ7hY-Ze0i1f0lRIFjmNATDIphdnFQ_DV1XRxdPXaP-SNJOUptyXH58Lyw0MYN6cYrRbubba9lFh8P0Nr-UQd-TkiOJn_kAi-r2gcQyoU-7yLK8SQosVLePMu_cesJNwhmKXHD7pGaFvSTI7aJduwEXqce16Kew=w902-h586-no" title="Oops..." />
     </aside>
 </div>
