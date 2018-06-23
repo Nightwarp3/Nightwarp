@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #4d4d4d;
+    background-color: #797979;
     color: #ffffff;
 }
 
@@ -32,9 +32,10 @@ li {
 
 .feeBreakdown {
     position: sticky;
-    top: 50%;
+    top: 25%;
     border: 1px solid black;
     border-radius: 2px;
+    background-color: #3e3e42;
 }
 
 .sectionHeading {

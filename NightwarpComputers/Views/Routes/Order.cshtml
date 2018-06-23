@@ -1,15 +1,13 @@
 ﻿<div class="row">
     <aside name="feeBreakdown" class="col-sm-2 feeBreakdown">
-        <div class="subHeading">Fee Breakdown:</div>
-        <div>
-            <i>Order Fee:</i>
-            <div>${{fees.orderFee}}</div>
+        <div class="col-xs-12 subHeading">Fee Breakdown:</div>
+        <div class="col-xs-12">
+            <div class="col-xs-6"><i>Order Fee:</i></div>
+            <div class="col-xs-6">${{fees.orderFee}}</div>
+            <div class="col-xs-6"><i>Build Fee:</i></div>
+            <div class="col-xs-6">${{fees.buildFee}}</div>
         </div>
-        <div>
-            <i>Build Fee:</i>
-            <div>${{fees.buildFee}}</div>
-        </div>
-        <div style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
+        <div class="col-xs-12" style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
     </aside>
     <section class="col-sm-8">
         <h1 class="pageHeader">{{message}}</h1>
@@ -17,13 +15,13 @@
         <form name="orderRequest" class="form-horizontal" ng-hide="orderReview" ng-submit="reviewOrder()">
             <div class="sectionHeading col-sm-12">Contact Information</div>
             <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">First and Last Name:</label>
+                <label for="name" class="col-sm-2 control-label">Full Name:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="name" required ng-model="formData.name" />
                 </div>
                 <label for="phone" class="col-sm-2 control-label">Phone Number:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="phone" placeholder="(Optional)" pattern="1?-?(\d{3}-?){2}\d{4}" title="#-###-###-#### \r\n ###-###-####" ng-model="formData.phone" />
+                    <input type="text" class="form-control" id="phone" placeholder="(Optional)" pattern="1?-?(\d{3}-?){2}\d{4}" title="1-555-555-5555 or 555-555-5555" ng-model="formData.phone" />
                 </div>
             </div>
             <div class="form-group">
@@ -31,25 +29,17 @@
                 <div class="col-sm-4">
                     <input type="email" class="form-control" id="email" required ng-model="formData.email" />
                 </div>
-                <label for="contactPref" class="col-sm-2 control-label">Contact Method Preference:</label>
-                <label class="col-sm-2">
-                    <input type="checkbox" id="contactPref" value="Email" ngTrueValue="Email" ng-model="formData.emailPref" />Email
-                </label>
-                <label class="col-sm-2">
-                    <input type="checkbox" id="contactPref" value="Phone" ngTrueValue="Phone" ng-model="formData.phonePref" />Phone
-                </label>
+                <label for="contactPref" class="col-sm-2 control-label">Contact Method:</label>
+                <div id="contactPref" class="col-sm-4">
+                    <label class="checkbox-inline"><input type="checkbox" id="emailPref" value="Email" ngTrueValue="Email" ng-model="formData.emailPref" />Email</label>
+                    <label class="checkbox-inline"><input type="checkbox" id="phonePref" value="Phone" ngTrueValue="Phone" ng-model="formData.phonePref" />Phone</label>
+                </div>
             </div>
             <div class="sectionHeading">Order Information</div>
             <div class="form-group">
-                <label class="col-sm-4">
-                    <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Order Only
-                </label>
-                <label class="col-sm-4">
-                    <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Build Only
-                </label>
-                <label class="col-sm-4">
-                    <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="formData.buildType">Order and Build
-                </label>
+                <label class="col-sm-offset-3"><input class="radio-inline" type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Order Only</label>
+                <label class="col-sm-offset-1"><input class="radio-inline" type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Build Only</label>
+                <label class="col-sm-offset-1"><input class="radio-inline" type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="formData.buildType">Order and Build</label>
             </div>
             <div class="form-group" ng-show="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'">
                 <label for="useType" class="col-sm-2 control-label">Usage Expectation:</label>
@@ -62,34 +52,29 @@
                 </div>
                 <label for="priceLimit" class="col-sm-2 control-label">Price Limit:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="priceLimit" ng-required="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'" placeholder="($1000.00)" pattern="\$(\d{0,3})*\.\d{2}" ng-model="formData.priceLimit" />
+                    <input type="text" class="form-control" id="priceLimit" ng-required="formData.buildType == 'orderOnly' || formData.buildType == 'orderBuild'" title="$1000.00" pattern="\$(\d{0,3})*\.\d{2}" ng-model="formData.priceLimit" />
                 </div>
             </div>
             <div class="form-group" ng-show="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'">
-                <label class="col-sm-5">
-                    <input type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="ship" ng-model="formData.deliveryType">Ship to You
-                </label>
-                <label class="col-sm-5">
-                    <input type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="pickup" ng-model="formData.deliveryType">Pickup in Person
-                </label>
+                <label class="col-xs-offset-4"><input class="radio-inline" type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="ship" ng-model="formData.deliveryType">Ship to You</label>
+                <label class="col-xs-offset-1"><input class="radio-inline" type="radio" name="deliveryType" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" value="pickup" ng-model="formData.deliveryType">Pickup in Person</label>
             </div>
             <div ng-show="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'">
-                <br />
                 <div class="sectionHeading" style="grid-column: 1 / span 4;">Shipping Information</div>
                 <div class="form-group">
                     <label for="address" class="col-sm-2 control-label">Street Address 1:</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="address" ng-model="formData.streetAddress1" />
                     </div>
-                    <label for="city" class="col-sm-2 control-label">City:</label>
+                    <label for="streetAddress2" class="col-sm-2 control-label">Street Address 2:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="city" ng-model="formData.city" />
+                        <input type="text" class="form-control" id="streetAddress2" placeholder="(Optional)" ng-model="formData.streetAddress2" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="streetAddress2" class="col-sm-1 control-label">Street Address 2:</label>
+                    <label for="city" class="col-sm-1 control-label">City:</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="streetAddress2" placeholder="(Optional)" ng-model="formData.streetAddress2" />
+                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="city" ng-model="formData.city" />
                     </div>
                     <label for="state" class="col-sm-1 control-label">State:</label>
                     <div class="col-sm-3">
@@ -147,9 +132,9 @@
                             <option value="WY">WY</option>
                         </select>
                     </div>
-                    <label for="zip" class="col-sm-1 control-label">Zip:</label>
+                    <label for="zipCode" class="col-sm-1 control-label">Zip:</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="zip" ng-maxlength="5" ng-model="formData.zip" />
+                        <input type="text" class="form-control" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" id="zipCode" ng-maxlength="5" ng-model="formData.zip" />
                     </div>
                 </div>
             </div>
@@ -157,15 +142,9 @@
                 <br />
                 <div class="sectionHeading" style="grid-column: 1 / span 4;">Build Information</div>
                 <div class="form-group">
-                    <label class="col-sm-4">
-                        <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="upload" ng-model="formData.partPreference">Parts List Link
-                    </label>
-                    <label class="col-sm-4">
-                        <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="preferences" ng-model="formData.partPreference">Select Preferences
-                    </label>
-                    <label class="col-sm-4">
-                        <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="noPreference" ng-model="formData.partPreference">Builder's Choice
-                    </label>
+                    <label class="col-sm-offset-3"><input class="radio-inline" type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="upload" ng-model="formData.partPreference">Parts List Link</label>
+                    <label class="col-sm-offset-1"><input class="radio-inline" type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="preferences" ng-model="formData.partPreference">Select Preferences</label>
+                    <label class="col-sm-offset-1"><input class="radio-inline" type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="noPreference" ng-model="formData.partPreference">Builder's Choice</label>
                 </div>
             </div>
             <div ng-show="formData.partPreference == 'upload'">
@@ -200,8 +179,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="motherboard" class="col-sm-1 control-label">Motherboard Options:</label>
-                    <div class="col-sm-3">
+                    <label for="motherboard" class="col-sm-2 control-label">Motherboard Options:</label>
+                    <div class="col-sm-4">
                         <select class="form-control" id="motherboard" ng-model="formData.motherboard">
                             <option value="ASUS">ASUS</option>
                             <option value="Gigabyte">Gigabyte</option>
@@ -210,20 +189,31 @@
                             <option value="Any (Highest Price)">Any (Highest Price)</option>
                         </select>
                     </div>
-                    <label for="graphics" class="col-sm-1 control-label">Graphics Options:</label>
-                    <div class="col-sm-3">
+                    <label for="graphics" class="col-sm-2 control-label">Graphics Options:</label>
+                    <div class="col-sm-4">
                         <select class="form-control" id="graphics" ng-model="formData.graphics">
                             <option value="integrated">Integrated (Lowest Price)</option>
                             <option value="Radeon">Radeon</option>
                             <option value="GeForce">GeForce</option>
                         </select>
                     </div>
-                    <label for="colorPref" class="col-sm-1 control-label">Color Preference:</label>
-                    <div class="col-sm-3">
+                </div>
+                <div class="form-group">
+                    <label for="colorPref" class="col-sm-2 control-label">Color Preference:</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" id="colorPref" placeholder="(Optional)" ng-model="formData.colorPref" />
                     </div>
+                    <label for="extras" class="col-sm-2 control-label">Extras:</label>
+                    <div class="col-sm-4">
+                        <select multiple class="form-control" id="extras" ng-model="formData.extras">
+                            <option>DVD Drive</option>
+                            <option>Blu-Ray Drive</option>
+                            <option>Blu-Ray Drive (Writable)</option>
+                            <option>LED Case Lights</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="subHeading col-sm-offset-5">Memory:</div>
+                <div class="subHeading col-sm-offset-1">Memory:</div>
                 <div class="form-group">
                     <label for="numOfSticks" class="col-sm-2 control-label">Quantity of Sticks:</label>
                     <div class="col-sm-2">
@@ -249,7 +239,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5">
-                    <button type="submit" class="btn btn-default">Review Order</button>
+                    <button type="submit" class="submit">Review Order</button>
                 </div>
             </div>
         </form>
@@ -261,8 +251,10 @@
                     {{item}}
                 </div>
             </div>
-            <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
-            <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
+            <div class="col-sm-offset-5">
+                <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
+                <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
+            </div>
         </div>
     </section>
     <aside class="col-sm-2">

@@ -25,7 +25,7 @@
     };
 
     $scope.reviewOrder = function () {
-        setupInputNames();
+        // setupInputNames();
         $scope.orderReview = true;
     };
 
@@ -38,7 +38,7 @@
         $location.path("/Submit/" + $scope.formData);
     };
 
-    var setupInputNames = function () {
+    /*var setupInputNames = function () {
         // $scope.contactPref
         if ($scope.emailPref && !$scope.phonePref) {
             $scope.contactPref = "Email";
@@ -79,7 +79,7 @@
         else {
             $scope.partPreferences = "Link to Parts List";
         }
-    };
+    };*/
 };
 
 OrderInterface.$inject = ['$scope', '$location']
