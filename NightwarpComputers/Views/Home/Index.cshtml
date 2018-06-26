@@ -5,22 +5,40 @@
 <body>
     <header class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 menu mainImage">
+            <div class="col-sm-12 mainImage">
                 <img name="mainImg" title="HeadingImage" src="https://lh3.googleusercontent.com/MZDFlGZyBjGlobxfmikHXOCLSNVaGoiPZxMD9oe7XaQmaDoUvmyIz74PuQrD_lazJs5l3-CMjRNqrFSipjJbdo7N2W3X3bAxpln3EBjJOBDOho5UXdVUtilxRu_2df0sKC_bLJAmejo9T-iKuEqTjq7OYMGEQ2x_lfOq299VRr6I7ppQErQF4enNyoP_QCD0wik3HvQee8Juz6f9YkCc4-B-KA_0MWKbdY2-f1yLwnEiFV1oQec-m7i4iP5nhQ8Z2cThpBEUdZ-Y3kHRhhSTUKZy_00zYMsJKEhL51gNZE6QG_jYU_J6ZdvXn3NAoR6DiQkX_KiDDJeDUZTyvRsLFcS_KMXeGcEckUpaa_0ulr0T952CmURUmJEw-b8jWYsrhiTanO31grL_YmEA8NpXy8ev88PXYpYpZ1ev_EcOKgfcBTkwzlLAbf-JQJJqyaDwo1D0rL_rueWUeHzfab_D0njAayolby7_Zo7aWZ4e4RBvbUGexVFH-zcglaXyRim1pKGcdAmnWxvLjmhBlf1dBJJlLR3YxryQBR1MTA68zuwtdSpat1fVdjp0DzkUXzvg8rqml9iS-PeEzzAdv490zeMeHqaaT7ct9_OJmvc=w1005-h206-no" />
             </div>
         </div>
-        <div class="row">
+        <nav class="navbar navbar-inverse" style="position: sticky;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">NightWarpComputers</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/Order">Order</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!--<div class="row">
             <div class="col-sm-12 menu">
                 <a href="/">Home</a>
                 <a href="/">About</a>
                 <a href="/Order">Order</a>
             </div>
-        </div>
+        </div>-->
     </header>
     <div class="container-fluid" ng-view>
 
     </div>
-    <footer class="container-fluid"></footer>
+    <footer class="container-fluid modal-footer" style="border-top: 1px solid black; text-align: center; bottom: 0px; margin-top: 100px;">
+        <h4>Nightwarp Computers</h4>
+        <p>p: 435-512-8850</p>
+        <p>e: <a href="mailto:NightwarpComputers@outlook.com">NightwarpComputers@outlook.com</a></p>
+        <p>1358 W 1925 S</p>
+        <p>Logan, UT 84321</p>
+    </footer>
 
     <script src="https://code.angularjs.org/1.2.28/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>

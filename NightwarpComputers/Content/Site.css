@@ -1,14 +1,10 @@
 ﻿body {
-    background-color: #797979;
+    background-color: #575757;
     color: #ffffff;
 }
 
 li {
     font-size: 15px;
-}
-
-.menu {
-    background-color: #352929;
 }
 
     .menu > a {
@@ -28,6 +24,8 @@ li {
 
 .mainImage {
     text-align: center;
+    background-color: #797979;
+    margin: 10px;
 }
 
 .feeBreakdown {

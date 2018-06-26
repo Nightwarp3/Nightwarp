@@ -26,6 +26,7 @@
 
     $scope.reviewOrder = function () {
         // setupInputNames();
+        console.log($scope.formData);
         $scope.orderReview = true;
     };
 
