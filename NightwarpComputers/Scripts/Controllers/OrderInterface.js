@@ -15,10 +15,10 @@
     $scope.recalculateOrder = function () {
         $scope.fees.orderFee = 0.00;
         $scope.fees.buildFee = 0.00;
-        if (($scope.formData.buildType == "orderOnly" || $scope.formData.buildType == "orderBuild") && $scope.formData.partPreference != "upload") {
+        if (($scope.formData.buildType === "orderOnly" || $scope.formData.buildType === "orderBuild") && $scope.formData.partPreference != "upload") {
             $scope.fees.orderFee = 50.00;
         }
-        if (($scope.formData.buildType == "buildOnly" || $scope.formData.buildType == "orderBuild")) {
+        if (($scope.formData.buildType === "buildOnly" || $scope.formData.buildType === "orderBuild")) {
             $scope.fees.buildFee = 50.00;
         }
         $scope.feeTotal = $scope.fees.calculateFee();
@@ -36,6 +36,7 @@
 
     $scope.sendOrder = function () {
         $scope.orderSubmitted = true;
+        var dataToSend = angular.toJson($scope.formData);
         $location.path("/Submit/" + $scope.formData);
     };
 
