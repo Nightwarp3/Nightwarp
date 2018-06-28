@@ -3,6 +3,18 @@
     color: #ffffff;
 }
 
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.footer {
+    border-top: 1px solid black;
+    text-align: center;
+    margin-top: 250px;
+}
+
 .feeBreakdown {
     position: sticky;
     top: 25%;
@@ -25,7 +37,7 @@
     font-size: 17px;
     text-align: left;
     border-bottom: 1px solid black;
-    padding: 5px;
+    margin: 5px;
 }
 
 .pageHeader {
@@ -34,14 +46,6 @@
     font: Cambria;
     text-align: center;
     padding-bottom: 25px;
-}
-
-.textImg {
-    height: auto;
-    width: 255px;
-    max-width: 100%;
-    float: left;
-    padding: 10px;
 }
 
 .submit {

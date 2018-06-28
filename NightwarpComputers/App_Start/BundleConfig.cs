@@ -12,6 +12,9 @@ namespace NightwarpComputers
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include("~/Content/bootstrap.min.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapJS")
+                .IncludeDirectory("~/Scripts/Bootstrap", "*.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/NightwarpComputers")
                 .IncludeDirectory("~/Scripts/Controllers", "*.js")
                 .Include("~/Scripts/app.js"));
