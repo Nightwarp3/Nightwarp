@@ -3,15 +3,6 @@
     color: #ffffff;
 }
 
-li > a:hover {
-    font-weight: bold;
-    background-color: #575757;
-}
-
-pageBlock {
-    margin-top: 200px;
-}
-
 .feeBreakdown {
     position: sticky;
     top: 25%;
