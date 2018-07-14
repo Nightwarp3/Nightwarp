@@ -247,6 +247,8 @@
         </form>
 
         <div name="orderReview" ng-show="orderReview">
+            <!-- TODO: Add HTML for a nice columned list to pull in the values entered, also show Hard Coded "nice" values when ng-show conditions are met -->
+            <!-- IE: show "Order Only" when formData.buildType == 'orderOnly' -->
             <div class="sectionHeading">Order Review</div>
             <div>
                 <div ng-repeat="item in formData" style="text-align: left;">

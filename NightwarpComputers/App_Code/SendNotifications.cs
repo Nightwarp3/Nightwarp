@@ -9,6 +9,7 @@ namespace NightwarpComputers.Content
 {
     public class SendNotifications
     {
+        // TODO: Rework whole class to be Static.
         public bool mailSent;
 
         public SendNotifications()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,8 +23,9 @@ namespace NightwarpComputers.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void PostOrder([FromBody]string order)
         {
+            NightwarpComputers.Content.SubmitOrder.SendOrder(order);
         }
 
         // PUT api/<controller>/5

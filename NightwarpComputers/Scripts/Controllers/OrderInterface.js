@@ -35,53 +35,24 @@
     };
 
     $scope.sendOrder = function () {
+        setupInputNames();
         $scope.orderSubmitted = true;
         var dataToSend = angular.toJson($scope.formData);
-        $location.path("/Submit/" + $scope.formData);
+        ("/Submit/" + $scope.formData);
     };
 
-    /*var setupInputNames = function () {
+    var setupInputNames = function () {
         // $scope.contactPref
         if ($scope.emailPref && !$scope.phonePref) {
-            $scope.contactPref = "Email";
+            $scope.formData.contactPref = "Email";
         }
         else if ($scope.phonePref && !$scope.emailPref) {
-            $scope.contactPref = "Phone";
+            $scope.formData.contactPref = "Phone";
         }
         else {
-            $scope.contactPref = "Either";
+            $scope.formData.contactPref = "Either";
         }
-
-        // $scope.typeBuild
-        if ($scope.buildType == "orderOnly") {
-            $scope.typeBuild = "Order Only";
-        }
-        else if ($scope.buildType == "buildOnly") {
-            $scope.typeBuild = "Build Only";
-        }
-        else {
-            $scope.typeBuild = "Order and Build";
-        }
-
-        // $scope.typeDelivery
-        if ($scope.deliveryType == "ship") {
-            $scope.typeDelivery = "Ship To You";
-        }
-        else {
-            $scope.typeDelivery = "Pickup in Person";
-        }
-
-        // $scope.partPreferences
-        if ($scope.partPreference == "preferences") {
-            $scope.partPreferences = "Select Preferences";
-        }
-        else if ($scope.partPreference == "noPreference") {
-            $scope.partPreferences = "Builder's Choice";
-        }
-        else {
-            $scope.partPreferences = "Link to Parts List";
-        }
-    };*/
+    };
 };
 
-OrderInterface.$inject = ['$scope', '$location']
+OrderInterface.$inject = ['$scope', '$location'];

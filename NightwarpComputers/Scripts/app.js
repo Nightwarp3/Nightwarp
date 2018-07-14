@@ -1,6 +1,6 @@
 ﻿var app = angular.module("pcBuildInterface", ["ngRoute"]);
 
-app.controller("HomeController", HomeController);
+app.controller("HtmlController", HtmlController);
 app.controller("OrderInterface", OrderInterface);
 
 var configFunction = function ($routeProvider, $locationProvider) {
