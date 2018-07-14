@@ -3,6 +3,20 @@
     color: #ffffff;
 }
 
+div[id^="conf"] {
+    font-weight: bold;
+    font-style: italic;
+}
+
+label[for^="conf"] {
+    text-align: right;
+    font-weight: normal;
+}
+
+div[name="orderReview"] > div[class^="col-"] {
+    border-right: 1px solid black;
+}
+
 .affix {
     top: 0;
     width: 100%;
