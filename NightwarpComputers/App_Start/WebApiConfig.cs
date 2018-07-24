@@ -12,12 +12,15 @@ namespace NightwarpComputers
 
         public static void Register(HttpConfiguration config)
         {
-            config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/Get/{id}",
                 defaults: new { id = RouteParameter.Optional }
+                );
+
+            config.Routes.MapHttpRoute(
+                name: "PostOrder",
+                routeTemplate: "api/PostOrder"
                 );
 
             // WebAPI when dealing with JSON & JavaScript!

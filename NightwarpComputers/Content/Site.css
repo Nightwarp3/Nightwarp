@@ -13,10 +13,6 @@ label[for^="conf"] {
     font-weight: normal;
 }
 
-div[name="orderReview"] > div[class^="col-"] {
-    border-right: 1px solid black;
-}
-
 .affix {
     top: 0;
     width: 100%;

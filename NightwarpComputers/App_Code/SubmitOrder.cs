@@ -16,14 +16,14 @@ namespace NightwarpComputers.Content
             order.SetValuesFromJson(json);
 
             InsertOrderInDB(order);
-            SendNotifications emailClient = new SendNotifications();
+            //SendNotifications emailClient = new SendNotifications();
 
             return status;
         }
 
         private static void InsertOrderInDB(Order order)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(order);
         }
     }
 }

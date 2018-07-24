@@ -1,4 +1,4 @@
-﻿var OrderInterface = function ($scope, $location) {
+﻿var OrderInterface = function ($scope, $location, $http) {
 
     $scope.message = "Nightwarp Computers - Order Request";
     $scope.formData = {};
@@ -25,8 +25,7 @@
     };
 
     $scope.reviewOrder = function () {
-        // setupInputNames();
-        console.log($scope.formData);
+        setupInputNames();
         $scope.orderReview = true;
     };
 
@@ -35,24 +34,31 @@
     };
 
     $scope.sendOrder = function () {
-        setupInputNames();
         $scope.orderSubmitted = true;
         var dataToSend = angular.toJson($scope.formData);
-        ("/Submit/" + $scope.formData);
+        console.log(dataToSend);
+        PostOrder(dataToSend);
     };
 
     var setupInputNames = function () {
         // $scope.contactPref
-        if ($scope.emailPref && !$scope.phonePref) {
-            $scope.formData.contactPref = "Email";
-        }
-        else if ($scope.phonePref && !$scope.emailPref) {
-            $scope.formData.contactPref = "Phone";
-        }
-        else {
+        if ($scope.emailPref && $scope.phonePref) {
             $scope.formData.contactPref = "Either";
         }
+        else if ($scope.emailPref) {
+            $scope.formData.contactPref = "Email";
+        }
+        else {
+            $scope.formData.contactPref = "Phone";
+        }
     };
+
+    var PostOrder = function (json) {
+        return $http.post("api/PostOrder", json)
+            .then(function (response) {
+                return response.data;
+            });
+    }
 };
 
-OrderInterface.$inject = ['$scope', '$location'];
+OrderInterface.$inject = ['$scope', '$location', '$http'];
