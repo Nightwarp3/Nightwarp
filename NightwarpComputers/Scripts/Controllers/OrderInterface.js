@@ -35,9 +35,8 @@
 
     $scope.sendOrder = function () {
         $scope.orderSubmitted = true;
-        var dataToSend = angular.toJson($scope.formData);
-        console.log(dataToSend);
-        PostOrder(dataToSend);
+        console.log($scope.formData);
+        PostOrder($scope.formData);
     };
 
     var setupInputNames = function () {
@@ -54,7 +53,8 @@
     };
 
     var PostOrder = function (json) {
-        return $http.post("api/PostOrder", json)
+        var config = { headers: { 'Content-Type': 'application/json' } }
+        $http.post("api/OrderWebApi/PostOrder", JSON.stringify(json), config)
             .then(function (response) {
                 return response.data;
             });

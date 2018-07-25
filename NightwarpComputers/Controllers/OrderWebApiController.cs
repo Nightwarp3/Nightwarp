@@ -23,9 +23,12 @@ namespace NightwarpComputers.Controllers
         }
 
         // POST api/<controller>
-        public void PostOrder([FromBody]string order)
+        [HttpPost]
+        public string PostOrder(object order)
         {
-            NightwarpComputers.Content.SubmitOrder.SendOrder(order);
+            NightwarpComputers.Content.SubmitOrder.SendOrder(order.ToString());
+
+            return "Success";
         }
     }
 }
