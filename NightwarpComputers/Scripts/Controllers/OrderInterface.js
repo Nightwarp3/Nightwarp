@@ -54,7 +54,7 @@
 
     var PostOrder = function (json) {
         var config = { headers: { 'Content-Type': 'application/json' } }
-        $http.post("api/OrderWebApi/PostOrder", JSON.stringify(json), config)
+        $http.post("api/Orders/PostOrder", JSON.stringify(json), config)
             .then(function (response) {
                 return response.data;
             });

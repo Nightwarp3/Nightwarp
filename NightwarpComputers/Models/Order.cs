@@ -8,16 +8,12 @@ namespace NightwarpComputers.Models
 {
     public class Order
     {
-        private string _streetAddress2;
-        private int _orderID;
-
-        public Order()
+        /*public Order()
         {
             Parts = new Dictionary<string, string>();
             DateSubmitted = new DateTime();
-            // Entity framework for DB Entry?
-            // Or direct sql
-        }
+        }*/
+        public int OrderId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -27,28 +23,15 @@ namespace NightwarpComputers.Models
         public string PriceLimit { get; set; }
         public string ShipMethod { get; set; }
         public string StreetAddress { get; set; }
-        public string StreetAddress2
-        {
-            get
-            {
-                return _streetAddress2;
-            }
-            set
-            {
-                if (value != _streetAddress2)
-                {
-                    _streetAddress2 = value;
-                }
-            }
-        }
+        public string StreetAddress2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
         public string BuildMethod { get; set; }
-        public Dictionary<string, string> Parts { get; set; }
+        public string Parts { get; set; }
         public DateTime DateSubmitted { get; set; }
 
-        public void SetValuesFromJson(string jsonString)
+        /*public void SetValuesFromJson(string jsonString)
         {
             // Convert string Json to Json Object, then populate into a Dictionary
             Dictionary<string, string> orderDict = JObject.Parse(jsonString).ToObject<Dictionary<string, string>>();
@@ -70,7 +53,7 @@ namespace NightwarpComputers.Models
                     StreetAddress2 = orderDict["streetAddress2"];
                     City = orderDict["city"];
                     State = orderDict["state"];
-                    Zip = orderDict["zip"];
+                    Zip = int.Parse(orderDict["zip"]);
                     break;
                 case "buildOnly":
                     ShipMethod = orderDict["deliveryType"];
@@ -84,11 +67,10 @@ namespace NightwarpComputers.Models
             switch (ShipMethod)
             {
                 case "ship":
-                    StreetAddress = orderDict["streetAddress1"];
-                    StreetAddress2 = orderDict["streetAddress2"];
+                    StreetAddress = orderDict["streetAddress1"] + orderDict["streetAddress2"];
                     City = orderDict["city"];
                     State = orderDict["state"];
-                    Zip = orderDict["zip"];
+                    Zip = int.Parse(orderDict["zip"]);
                     break;
             }
 
@@ -106,6 +88,6 @@ namespace NightwarpComputers.Models
                     Parts.Add("Preference", "Builder's Choice");
                     break;
             }
-        }
+        }*/
     }
 }
