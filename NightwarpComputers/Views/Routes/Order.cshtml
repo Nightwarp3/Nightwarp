@@ -207,7 +207,7 @@
                     </div>
                     <label for="extras" class="col-lg-2 control-label">Extras:</label>
                     <div class="col-lg-4">
-                        <select multiple class="form-control input-sm" id="extras" ng-model="formData.extras">
+                        <select multiple class="form-control input-sm" id="extras" ng-model="extras">
                             <option>DVD Drive</option>
                             <option>Blu-Ray Drive</option>
                             <option>Blu-Ray Drive (Writable)</option>
@@ -309,12 +309,12 @@
                 </div>
                 <div class="col-lg-3">
                     <label class="col-sm-6" for="confMemory">Memory:</label>
-                    <div class="col-sm-6" id="confMemory">{{formData.numOfSticks}} x {{memPerStick}}</div>
+                    <div class="col-sm-6" id="confMemory">{{formData.numOfSticks}} x {{formData.memPerStick}}GB</div>
                 </div>
-                <div class="col-lg-12" ng-show="formData.extras">
+                <div class="col-lg-12" ng-show="extras">
                     <label class="col-sm-6" for="confExtras">Extras:</label>
                     <div class="col-sm-6" id="confExtras" style="border: 1px solid black;">
-                        <div ng-repeat="extra in formData.extras">{{extra}}</div>
+                        <div ng-repeat="extra in extras">{{extra}}</div>
                     </div>
                 </div>
             </div>

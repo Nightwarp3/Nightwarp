@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using NightwarpComputers.DataAccess;
 using NightwarpComputers.Models;
+using NightwarpComputers.Content;
 
 namespace NightwarpComputers.Controllers
 {
@@ -81,9 +82,17 @@ namespace NightwarpComputers.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Orders.Add(order);
-            db.SaveChanges();
-
+            try
+            {
+                order.SetValuesFromJson(orderJson.ToString());
+                SendNotifications.SendNotification(order);
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                InternalServerError(e);
+            }
             return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
         }
 

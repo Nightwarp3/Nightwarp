@@ -1,66 +1,42 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-using System.Linq;
 using System.Collections.Generic;
-using System.Web;
+using NightwarpComputers.Models;
 
 namespace NightwarpComputers.Content
 {
-    public class SendNotifications
+    public static class SendNotifications
     {
-        // TODO: Rework whole class to be Static.
-        public bool mailSent;
-
-        public SendNotifications()
-        {
-            mailSent = false;
-        }
-
-        public bool SendNewRequestAlert(string orderID, string request)
+        public static void SendNotification(Order order)
         {
             SmtpClient client = SetupSmtpClient();
-            string subject = "New Order Request - " + orderID;
-            MailMessage msg = SetupMailMessage(new string[]{ "mdcampb93@gmail.com" }, subject, request.Replace(",", "\r\n"));
-            return SendMail(client, msg);
+            MailMessage message = SetupMailMessage(order);
+            client.Send(message);
         }
 
-        public bool SendNotificationEmail(string[] to, string subject, string message)
+        private static MailMessage SetupMailMessage(Order order)
         {
-            SmtpClient client = SetupSmtpClient();
-            MailMessage msg = SetupMailMessage(to, subject, message);
-            return SendMail(client, msg);
-        }
+            string messageBody = "";
+            MailMessage msg = new MailMessage()
+            {
+                From = new MailAddress("NightwarpComputers@outlook.com"),
+                Subject = "New Order Request - " + order.OrderId
+            };
+            msg.To.Add(new MailAddress(order.Email));
 
-        private bool SendMail(SmtpClient client, MailMessage msg)
-        {
-            try
+            Dictionary<string, string> orderInfo = order.ToDictionary();
+            foreach (var pair in orderInfo)
             {
-                client.Send(msg);
-                mailSent = true;
+                if (!string.IsNullOrEmpty(pair.Value))
+                    messageBody += pair.Key + " " + pair.Value + "\r\n";
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            client.Dispose();
-            return mailSent;
-        }
+            msg.Body = messageBody;
 
-        private static MailMessage SetupMailMessage(string[] to, string sub, string body)
-        {
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("NightwarpComputers@outlook.com");
-            foreach (string address in to)
-            {
-                msg.To.Add(new MailAddress(address));
-            }
-            msg.Subject = sub;
-            msg.Body = body;
             return msg;
         }
 
-        private SmtpClient SetupSmtpClient()
+        private static SmtpClient SetupSmtpClient()
         {
             SmtpClient client = new SmtpClient("smtp.office365.com", 587)
             {

@@ -40,6 +40,15 @@
     };
 
     var setupInputNames = function () {
+        // Fees
+        $scope.formData.orderFee = $scope.fees.orderFee;
+        $scope.formData.buildFee = $scope.fees.buildFee;
+
+        // Extras
+        for (var extra in $scope.extras) {
+            $scope.formData.extras += extra + "\r\n";
+        }
+
         // $scope.contactPref
         if ($scope.emailPref && $scope.phonePref) {
             $scope.formData.contactPref = "Either";

@@ -8,11 +8,12 @@ namespace NightwarpComputers.Models
 {
     public class Order
     {
-        /*public Order()
+        public Order()
         {
-            Parts = new Dictionary<string, string>();
             DateSubmitted = new DateTime();
-        }*/
+            Fees = new int[2];
+            Parts = "";
+        }
         public int OrderId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -30,8 +31,34 @@ namespace NightwarpComputers.Models
         public string BuildMethod { get; set; }
         public string Parts { get; set; }
         public DateTime DateSubmitted { get; set; }
+        // Better way to handle fees.... possibly another entity using a navigation property?
+        public int[] Fees { get; set; }
 
-        /*public void SetValuesFromJson(string jsonString)
+        public Dictionary<string, string> ToDictionary()
+        {
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
+            {
+                { "OrderID:", OrderId.ToString() },
+                { "Order Date:", DateSubmitted.ToShortDateString() },
+                { "Order Fee:", "$" + Fees[0].ToString() },
+                { "Build Fee:", "$" + Fees[1].ToString() },
+                { "Full Name:", Name },
+                { "Phone:", Phone },
+                { "Email Address:", Email },
+                { "Contact Preference:", ContactMethod },
+                { "Order Type:", OrderMethod },
+                { "Usage:", Usage },
+                { "Price Limit:", PriceLimit },
+                { "Shipping Method:", ShipMethod },
+                { "Shipping Address:", string.Format("{0}, {1} {2}, {3} {4}", StreetAddress, StreetAddress2, City, State, Zip) },
+                { "Build Preference:", BuildMethod },
+                { "Additional Parts:", Parts }
+            };
+
+            return keyValuePairs;
+        }
+
+        public void SetValuesFromJson(string jsonString)
         {
             // Convert string Json to Json Object, then populate into a Dictionary
             Dictionary<string, string> orderDict = JObject.Parse(jsonString).ToObject<Dictionary<string, string>>();
@@ -43,6 +70,8 @@ namespace NightwarpComputers.Models
             ContactMethod = orderDict["contactPref"];
             OrderMethod = orderDict["buildType"];
             BuildMethod = orderDict["partPreference"];
+            Fees[0] = int.Parse(orderDict["orderFee"]);
+            Fees[1] = int.Parse(orderDict["buildFee"]);
 
             switch (OrderMethod)
             {
@@ -53,7 +82,7 @@ namespace NightwarpComputers.Models
                     StreetAddress2 = orderDict["streetAddress2"];
                     City = orderDict["city"];
                     State = orderDict["state"];
-                    Zip = int.Parse(orderDict["zip"]);
+                    Zip = orderDict["zip"];
                     break;
                 case "buildOnly":
                     ShipMethod = orderDict["deliveryType"];
@@ -70,7 +99,7 @@ namespace NightwarpComputers.Models
                     StreetAddress = orderDict["streetAddress1"] + orderDict["streetAddress2"];
                     City = orderDict["city"];
                     State = orderDict["state"];
-                    Zip = int.Parse(orderDict["zip"]);
+                    Zip = orderDict["zip"];
                     break;
             }
 
@@ -78,16 +107,20 @@ namespace NightwarpComputers.Models
             switch (BuildMethod)
             {
                 case "preferences":
-                    Parts.Add("Processor", orderDict["processorType"] + orderDict["processorModel"]);
-                    Parts.Add("Motherboard", orderDict["motherboard"]);
+                    Parts += "Processor: " + orderDict["processorType"] + orderDict["processorModel"] + "\r\n";
+                    Parts += "Motherboard: " + orderDict["motherboard"] + "\r\n";
+                    Parts += "Graphics: " + orderDict["graphics"] + "\r\n";
+                    Parts += "Memory: " + orderDict["numOfSticks"] + " x " + orderDict["memPerStick"] + "GB\r\n";
+                    Parts += "Color: " + orderDict["colorPref"] + "\r\n";
+                    Parts += "Extras: " + orderDict["extras"];
                     break;
                 case "upload":
-                    Parts.Add("Link", orderDict["partsListLink"]);
+                    Parts += "Link: " + orderDict["partsListLink"];
                     break;
                 default:
-                    Parts.Add("Preference", "Builder's Choice");
+                    Parts += "Builder's Choice";
                     break;
             }
-        }*/
+        }
     }
 }
