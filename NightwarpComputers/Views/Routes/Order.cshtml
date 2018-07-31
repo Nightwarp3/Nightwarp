@@ -12,7 +12,7 @@
     <section class="col-lg-8">
         <h1 class="pageHeader">{{message}}</h1>
 
-        <form name="orderRequest" class="form-horizontal" ng-hide="orderReview" ng-submit="reviewOrder()">
+        <form name="orderRequest" class="form-horizontal" ng-hide="orderReview || loading" ng-submit="reviewOrder()">
             <div class="sectionHeading col-lg-12">Contact Information</div>
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Full Name:</label>
@@ -246,7 +246,7 @@
             </div>
         </form>
 
-        <div name="orderReview" ng-show="orderReview">
+        <div name="orderReview" ng-show="orderReview && !loading">
             <!-- TODO: Add HTML for a nice columned list to pull in the values entered, also show Hard Coded "nice" values when ng-show conditions are met -->
             <!-- IE: show "Order Only" when formData.buildType == 'orderOnly' -->
             <div class="sectionHeading">Order Review</div>
@@ -320,10 +320,15 @@
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-offset-5">
-                    <button class="submit" ng-show="orderReview" ng-click="editOrder()">Edit Order</button>
-                    <button class="submit" ng-show="orderReview" ng-click="sendOrder()">Send Order</button>
+                    <button class="submit" ng-show="orderReview && !completedOrder" ng-click="editOrder()">Edit Order</button>
+                    <button class="submit" ng-show="orderReview && !completedOrder" ng-click="sendOrder()">Send Order</button>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-offset-5 sectionHeading" ng-show="loading" style="text-align: center;">
+            Submitting Order Request...
+            <div class="loader"></div>
+            Email should be received shortly.
         </div>
     </section>
     <aside class="col-lg-2"></aside>

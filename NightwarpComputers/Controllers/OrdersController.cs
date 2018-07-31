@@ -85,15 +85,15 @@ namespace NightwarpComputers.Controllers
             try
             {
                 order.SetValuesFromJson(orderJson.ToString());
-                SendNotifications.SendNotification(order);
                 db.Orders.Add(order);
                 db.SaveChanges();
+                SendNotifications.SendNotification(order);
+                return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
             }
             catch (Exception e)
             {
-                InternalServerError(e);
+                return InternalServerError(e);
             }
-            return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
         }
 
         // DELETE: api/Orders/5

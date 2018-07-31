@@ -1,4 +1,4 @@
-﻿var OrderInterface = function ($scope, $location, $http) {
+﻿var OrderInterface = function ($scope, $location, $http, $window) {
 
     $scope.message = "Nightwarp Computers - Order Request";
     $scope.formData = {};
@@ -34,7 +34,7 @@
     };
 
     $scope.sendOrder = function () {
-        $scope.orderSubmitted = true;
+        $scope.loading = true;
         console.log($scope.formData);
         PostOrder($scope.formData);
     };
@@ -65,9 +65,18 @@
         var config = { headers: { 'Content-Type': 'application/json' } }
         $http.post("api/Orders/PostOrder", JSON.stringify(json), config)
             .then(function (response) {
-                return response.data;
+                $scope.loading = false;
+                console.log(response.data);
+                $scope.completedOrder = response.data;
+                $window.alert("Order Submitted Successfully! Order ID is: " + response.data.OrderId + ". Received on: " + response.data.DateSubmitted);
+                // http.post returns the Order Object. Would be nice to display if successful on a new page that says success or something.
+                // http.post error returns...
+            }, function (response) {
+                console.log(response);
+                $scope.loading = false;
+                $window.alert(response.status + ": " + response.statusText + ". Please try again or contact Support.");
             });
     }
 };
 
-OrderInterface.$inject = ['$scope', '$location', '$http'];
+OrderInterface.$inject = ['$scope', '$location', '$http', '$window'];

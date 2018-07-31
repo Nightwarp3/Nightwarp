@@ -10,7 +10,7 @@ namespace NightwarpComputers.Models
     {
         public Order()
         {
-            DateSubmitted = new DateTime();
+            DateSubmitted = DateTime.Now;
             Fees = new int[2];
             Parts = "";
         }
@@ -24,7 +24,6 @@ namespace NightwarpComputers.Models
         public string PriceLimit { get; set; }
         public string ShipMethod { get; set; }
         public string StreetAddress { get; set; }
-        public string StreetAddress2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
@@ -50,7 +49,7 @@ namespace NightwarpComputers.Models
                 { "Usage:", Usage },
                 { "Price Limit:", PriceLimit },
                 { "Shipping Method:", ShipMethod },
-                { "Shipping Address:", string.Format("{0}, {1} {2}, {3} {4}", StreetAddress, StreetAddress2, City, State, Zip) },
+                { "Shipping Address:", string.Format("{0} {1}, {2} {3}", StreetAddress, City, State, Zip) },
                 { "Build Preference:", BuildMethod },
                 { "Additional Parts:", Parts }
             };
@@ -63,9 +62,12 @@ namespace NightwarpComputers.Models
             // Convert string Json to Json Object, then populate into a Dictionary
             Dictionary<string, string> orderDict = JObject.Parse(jsonString).ToObject<Dictionary<string, string>>();
 
+            orderDict.TryGetValue("streetAddress2", out string streetAddress2);
+            orderDict.TryGetValue("phone", out string phoneNum);
+
             // Populate Order properties with Dictionary values
             Name = orderDict["name"];
-            Phone = orderDict["phone"];
+            Phone = phoneNum;
             Email = orderDict["email"];
             ContactMethod = orderDict["contactPref"];
             OrderMethod = orderDict["buildType"];
@@ -78,8 +80,7 @@ namespace NightwarpComputers.Models
                 case "orderOnly":
                     Usage = orderDict["useType"];
                     PriceLimit = orderDict["priceLimit"];
-                    StreetAddress = orderDict["streetAddress1"];
-                    StreetAddress2 = orderDict["streetAddress2"];
+                    StreetAddress = orderDict["streetAddress1"] + " " + streetAddress2;
                     City = orderDict["city"];
                     State = orderDict["state"];
                     Zip = orderDict["zip"];
@@ -96,7 +97,7 @@ namespace NightwarpComputers.Models
             switch (ShipMethod)
             {
                 case "ship":
-                    StreetAddress = orderDict["streetAddress1"] + orderDict["streetAddress2"];
+                    StreetAddress = orderDict["streetAddress1"] + " " + streetAddress2;
                     City = orderDict["city"];
                     State = orderDict["state"];
                     Zip = orderDict["zip"];
