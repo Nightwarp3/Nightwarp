@@ -1,61 +1,92 @@
 ﻿<!DOCTYPE html>
-<html ng-app="pcBuildInterface">
+<html lang="en" ng-app="pcBuildInterface">
 <head>
-    <title>Nightwarp Computers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Nighwarp Computers</title>
+    <link rel="icon" href="~/Content/Images/favicon.ico" />
 </head>
 <body>
-    <header class="container-fluid">
-        <div class="row" style="margin-bottom: 5px;">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <img class="img-responsive" style="margin: 0 auto;" title="HeadingImage" src="~/Content/Images/header.png" />
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="~/Content/Images/logo.png" style="padding: 0px; height: 50px;" />Nightwarp Computers
+            </a>
+            <a class="btn btn-secondary" href="/Order">Order Now!</a>
+            <!--<a class="btn btn-primary" href="#">Sign In</a>
+            <a class="btn btn-secondary" href="#">Sign Up</a>
+            <a class="btn btn-secondary" href="#">Cart</a>-->
         </div>
-        <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="250">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="/">
-                        <img class="navbar-brand" title="ncLogo" src="~/Content/Images/logo.png" style="padding: 0px;" />
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">About</a></li>
-                        <li><a href="/Order">Order</a></li>
-                    </ul>
+    </nav>
+    <!-- Masthead -->
+    <header class="masthead text-white text-center" style="background: url('/Content/Images/bg-masthead.jpg') no-repeat center center;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">Nightwarp Computers!</h1>
+                    <h2 class="mb-5">Quality Custom PCs</h2>
                 </div>
             </div>
-        </nav>
-        <!--<div class="row">
-        <div class="col-sm-12 menu">
-            <a href="/">Home</a>
-            <a href="/">About</a>
-            <a href="/Order">Order</a>
         </div>
-    </div>-->
     </header>
     <div class="container-fluid" ng-view>
 
     </div>
-    <footer class="container-fluid footer">
-        <h4>Nightwarp Computers</h4>
-        <div>p: 435-512-8850</div>
-        <div>e: <a href="mailto:NightwarpComputers@outlook.com">NightwarpComputers@outlook.com</a></div>
-        <div>1358 W 1925 S</div>
-        <div>Logan, UT 84321</div>
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="/About">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="/Contact">Contact</a>
+                        </li>
+                        <!--<li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>-->
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Nightwarp Computers 2018. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fa fa-facebook fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fa fa-twitter fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-instagram fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
-
     <script src="https://code.angularjs.org/1.2.28/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    @Scripts.Render("~/bundles/bootstrapJS")
-    @Scripts.Render("~/bundles/NightwarpComputers")
-    @Styles.Render("~/Content/bootstrap")
-    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/JS")
+    @Scripts.Render("~/NCAngular")
+    @Styles.Render("~/CSS")
+    @Styles.Render("~/Fonts")
 </body>
 </html>

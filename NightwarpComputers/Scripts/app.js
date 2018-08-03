@@ -1,6 +1,5 @@
 ﻿var app = angular.module("pcBuildInterface", ["ngRoute"]);
 
-//app.controller("HtmlController", HtmlController);
 app.controller("OrderInterface", OrderInterface);
 
 var configFunction = function ($routeProvider, $locationProvider) {
@@ -8,15 +7,11 @@ var configFunction = function ($routeProvider, $locationProvider) {
 
     $routeProvider
         .when("/Home", {
-            templateUrl: "routes/home",
-            controller: "HomeController"
+            templateUrl: "routes/home"
         })
         .when("/Order", {
             templateUrl: "routes/order",
             controller: "OrderInterface"
-        })
-        .when("/Submit/:orderData", {
-            templateUrl: function (params) { return '/routes/orderSubmitted?orderData=' + params.orderData; }
         })
         .otherwise({
             redirectTo: "/Home"
