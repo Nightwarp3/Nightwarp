@@ -298,7 +298,6 @@
     <Content Include="Content\Scss\_variables.scss" />
     <None Include="packages.config" />
     <Content Include="Views\Routes\Home.cshtml" />
-    <Content Include="Views\Routes\OrderSubmitted.cshtml" />
     <None Include="Properties\PublishProfiles\NightwarpComputers20180612114452 - Web Deploy.pubxml" />
     <Content Include="Scripts\JQuery\jquery.min.map" />
     <Content Include="Scripts\JQuery\jquery.slim.min.map" />

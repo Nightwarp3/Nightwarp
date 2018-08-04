@@ -1,14 +1,62 @@
-﻿<div class="row">
-    <aside name="feeBreakdown" class="col-lg-2 feeBreakdown">
-        <div class="col-xs-12 subHeading">Fee Breakdown:</div>
-        <div class="col-xs-12">
-            <div class="col-xs-6"><i>Order Fee:</i></div>
-            <div class="col-xs-6">${{fees.orderFee}}</div>
-            <div class="col-xs-6"><i>Build Fee:</i></div>
-            <div class="col-xs-6">${{fees.buildFee}}</div>
+﻿<aside class="bg-dark text-light col-2 float-left">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12">Fee Breakdown:</div>
         </div>
-        <div class="col-xs-12" style="margin-top: 5px; border-top: 1px solid black;">FEE TOTAL: ${{feeTotal}}</div>
-    </aside>
+        <div class="row">
+            <div class="col-6"><i>Order Fee:</i></div>
+            <div class="col-6">${{fees.orderFee}}</div>
+        </div>
+        <div class="row">
+            <div class="col-6"><i>Build Fee:</i></div>
+            <div class="col-6">${{fees.buildFee}}</div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12 border-light">Fee Total: ${{feeTotal}}</div>
+        </div>
+    </div>
+</aside>
+
+<!-- Icons Grid -->
+<section class="features-icons bg-light text-center col-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-layers m-auto text-primary"></i>
+                    </div>
+                    <h3>Many Order Options</h3>
+                    <p class="lead mb-0">Can Order, just Build, or Both!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-check m-auto text-primary"></i>
+                    </div>
+                    <h3>Simple to use</h3>
+                    <p class="lead mb-0">Simple order form and no technical knowledge required!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-screen-desktop m-auto text-primary"></i>
+                    </div>
+                    <h3>Custom PCs</h3>
+                    <p class="lead mb-0">Custom machines that are a reflection of you!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="bg-dark"></div>
+
+
+<div class="row">
     <section class="col-lg-8">
         <h1 class="pageHeader">{{message}}</h1>
 
