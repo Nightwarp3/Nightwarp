@@ -17,43 +17,121 @@
     </div>
 </aside>
 
-<!-- Icons Grid -->
-<section class="features-icons bg-light text-center col-10">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                        <i class="icon-layers m-auto text-primary"></i>
-                    </div>
-                    <h3>Many Order Options</h3>
-                    <p class="lead mb-0">Can Order, just Build, or Both!</p>
+<section class="bg-light col-8 float-left">
+    <h2 class="text-lg-center">Order Request</h2>
+    <div class="card text-center">
+        <!-- Navigation Tabs for Order -->
+        <div class="card-header">
+            <!-- Work on adding cool icons for each, then graying out any that aren't applicable to the order -->
+            <ul class="nav nav-tabs card-header-tabs">
+                <!-- Show Active Tab when Active -->
+                <!-- Hide Inactive Tab when Active -->
+                <li class="nav-item" ng-show="tab == 'contact'">
+                    <a class="nav-link active" href="#" ng-click="contactView()">Contact</a>
+                </li>
+                <li class="nav-item" ng-hide="tab == 'contact'">
+                    <a class="nav-link" href="#" ng-click="contactView()">Contact</a>
+                </li>
+                <li class="nav-item" ng-show="tab == 'order'">
+                    <a class="nav-link active" href="#" ng-click="contactView()">Order Details</a>
+                </li>
+                <li class="nav-item" ng-hide="tab == 'order'">
+                    <a class="nav-link" href="#" ng-click="orderView()">Order Details</a>
+                </li>
+                <li class="nav-item" ng-show="tab == 'address'">
+                    <a class="nav-link active" href="#" ng-click="contactView()">Address</a>
+                </li>
+                <li class="nav-item" ng-hide="tab == 'address'">
+                    <a class="nav-link" href="#" ng-click="addressView()">Address</a>
+                </li>
+                <li class="nav-item" ng-show="tab == 'build'">
+                    <a class="nav-link active" href="#" ng-click="contactView()">Build Details</a>
+                </li>
+                <li class="nav-item" ng-hide="tab == 'build'">
+                    <a class="nav-link" href="#" ng-click="buildView()">Build Details</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="card-body" ng-show="tab == 'contact'">
+            <h5 class="card-title">Contact Information</h5>
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <form>
+                        <div class="form-row justify-content-center">
+                            <div class="col-6 col-md-5 m-3">
+                                <input type="text" class="form-control form-control-sm" placeholder="Full Name" required ng-model="formData.name" />
+                            </div>
+                            <div class="col-6 col-md-5 m-3">
+                                <div class="col-12">
+                                    <label style="display: inline;">Contact Preference:</label>
+                                    <label class="col-4" style="display: inline;">
+                                        <input type="checkbox" id="emailPref" value="Email" ng-model="emailPref" />Email
+                                    </label>
+                                    <label class="col-4" style="display: inline;">
+                                        <input type="checkbox" id="phonePref" value="Phone" ng-model="phonePref" />Phone
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row justify-content-center">
+                            <div class="col-6 col-md-5 m-3">
+                                <input type="email" class="form-control form-control-sm" placeholder="Email Address" required ng-model="formData.email" />
+                            </div>
+                            <div class="col-6 col-md-5 m-3">
+                                <input type="text" class="form-control form-control-sm" id="phone" placeholder="Phone (123-456-789)" pattern="1?-?(\d{3}-?){2}\d{4}" title="1-555-555-5555 or 555-555-5555" ng-model="formData.phone" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 justify-content-center mt-5">
+                    <button class="submit btn-dark" ng-click="orderView()">Next</button>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                        <i class="icon-check m-auto text-primary"></i>
-                    </div>
-                    <h3>Simple to use</h3>
-                    <p class="lead mb-0">Simple order form and no technical knowledge required!</p>
+        </div>
+
+        <!-- Order Details -->
+        <div class="card-body" ng-show="tab == 'order'">
+            <h5 class="card-title">Order Information</h5>
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <form>
+                        <div class="form-row justify-content-center">
+                            <div class="col-12 col-md-9 mb-3">
+                                <label class="d-inline">
+                                    <input type="radio" name="buildType" required value="orderOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Order Only
+                                </label>
+                                <label class="d-inline">
+                                    <input type="radio" name="buildType" required value="buildOnly" ng-change="recalculateOrder()" ng-model="formData.buildType">Build Only
+                                </label>
+                                <label class="d-inline">
+                                    <input type="radio" name="buildType" required value="orderBuild" ng-change="recalculateOrder()" ng-model="formData.buildType">Order and Build
+                                </label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                        <i class="icon-screen-desktop m-auto text-primary"></i>
-                    </div>
-                    <h3>Custom PCs</h3>
-                    <p class="lead mb-0">Custom machines that are a reflection of you!</p>
+                <div class="col-12 justify-content-center mt-5">
+                    <button class="col-6 btn-secondary" ng-click="orderView()">Previous</button>
+                    <button class="col-6 submit btn-dark" ng-click="addressView()">Next</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<aside class="col-2">
+    <div class="container">
+        <div class="row">
+            <img src="~/Content/Images/bg-showcase-3.jpg" />
+        </div>
+    </div>
+</aside>
 
-<div class="bg-dark"></div>
+<div class="bg-dark">
+    <p>Line</p>
+</div>
 
 
 <div class="row">
@@ -65,7 +143,6 @@
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Full Name:</label>
                 <div class="col-lg-4">
-                    <input type="text" class="form-control input-sm" id="name" required ng-model="formData.name" />
                 </div>
                 <label for="phone" class="col-lg-2 control-label">Phone Number:</label>
                 <div class="col-lg-4">

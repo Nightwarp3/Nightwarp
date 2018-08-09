@@ -1,6 +1,6 @@
 ﻿var OrderInterface = function ($scope, $location, $http, $window) {
 
-    $scope.message = "Nightwarp Computers - Order Request";
+    $scope.tab = "contact";
     $scope.formData = {};
     $scope.orderSubmitted = false;
     $scope.feeTotal = 0.00;
@@ -38,6 +38,22 @@
         console.log($scope.formData);
         PostOrder($scope.formData);
     };
+
+    $scope.contactView = function () {
+        $scope.tab = "contact";
+    }
+
+    $scope.orderView = function () {
+        $scope.tab = "order";
+    }
+
+    $scope.addressView = function () {
+        $scope.tab = "address";
+    }
+
+    $scope.buildView = function () {
+        $scope.tab = "build";
+    }
 
     var setupInputNames = function () {
         // Fees
