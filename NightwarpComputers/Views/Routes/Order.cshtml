@@ -22,33 +22,18 @@
     <div class="card text-center">
         <!-- Navigation Tabs for Order -->
         <div class="card-header">
-            <!-- Work on adding cool icons for each, then graying out any that aren't applicable to the order -->
             <ul class="nav nav-tabs card-header-tabs">
-                <!-- Show Active Tab when Active -->
-                <!-- Hide Inactive Tab when Active -->
-                <li class="nav-item" ng-show="tab == 'contact'">
-                    <a class="nav-link active" href="#" ng-click="nextView('contact')">Contact</a>
+                <li class="nav-item">
+                    <a class="nav-link" ng-class="{active: tab == 'contact'}" href="#" ng-click="nextView('contact')">Contact</a>
                 </li>
-                <li class="nav-item" ng-hide="tab == 'contact'">
-                    <a class="nav-link" href="#" ng-click="nextView('contact')">Contact</a>
+                <li class="nav-item">
+                    <a class="nav-link" ng-class="{active: tab == 'order'}" href="#" ng-click="nextView('order')">Order Details</a>
                 </li>
-                <li class="nav-item" ng-show="tab == 'order'">
-                    <a class="nav-link active" href="#" ng-click="nextView('order')">Order Details</a>
+                <li class="nav-item">
+                    <a class="nav-link" ng-class="{active: tab == 'address', disabled: formData.deliveryType != 'ship' && formData.buildType != 'orderOnly'}" href="#" ng-click="nextView('address')">Address</a>
                 </li>
-                <li class="nav-item" ng-hide="tab == 'order'">
-                    <a class="nav-link" href="#" ng-click="nextView('order')">Order Details</a>
-                </li>
-                <li class="nav-item" ng-show="tab == 'address'">
-                    <a class="nav-link active" href="#" ng-click="nextView('address')">Address</a>
-                </li>
-                <li class="nav-item" ng-hide="tab == 'address'">
-                    <a class="nav-link" href="#" ng-click="nextView('address')">Address</a>
-                </li>
-                <li class="nav-item" ng-show="tab == 'build'">
-                    <a class="nav-link active" href="#" ng-click="nextView('build')">Build Details</a>
-                </li>
-                <li class="nav-item" ng-hide="tab == 'build'">
-                    <a class="nav-link" href="#" ng-click="nextView('build')">Build Details</a>
+                <li class="nav-item">
+                    <a class="nav-link" ng-class="{active: tab == 'build', disabled: formData.buildType != 'buildOnly' && formData.buildType != 'orderBuild'}" href="#" ng-click="nextView('build')">Build Details</a>
                 </li>
             </ul>
         </div>
@@ -58,7 +43,7 @@
             <h5 class="card-title">Contact Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form>
+                    <form ng-submit="nextView('order')">
                         <div class="form-row justify-content-center">
                             <div class="col-6 col-md-5 m-2">
                                 <input type="text" class="form-control form-control-sm" placeholder="Full Name" ng-maxlength="100" required ng-model="formData.name" />
@@ -83,11 +68,11 @@
                                 <input type="text" class="form-control form-control-sm" id="phone" placeholder="Phone (123-456-789)" pattern="1?-?(\d{3}-?){2}\d{4}" title="1-555-555-5555 or 555-555-5555" ng-model="formData.phone" />
                             </div>
                         </div>
+                        <div class="col-12 justify-content-center mt-5">
+                            <button class="btn-secondary float-left" disabled>Previous</button>
+                            <button type="submit" class="btn-dark float-right">Next</button>
+                        </div>
                     </form>
-                </div>
-                <div class="col-12 justify-content-center mt-5">
-                    <button class="btn-secondary float-left" disabled>Previous</button>
-                    <button class="btn-dark float-right" ng-click="nextView('order')">Next</button>
                 </div>
             </div>
         </div>
@@ -97,7 +82,7 @@
             <h5 class="card-title">Order Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form>
+                    <form ng-submit="nextView('address')">
                         <div class="form-row justify-content-center">
                             <div class="col-12 col-md-9 m-3">
                                 <label class="d-inline m-3">
@@ -138,7 +123,7 @@
                 </div>
                 <div class="col-12 justify-content-center mt-5">
                     <button class="btn-secondary float-left" ng-click="nextView('contact')">Previous</button>
-                    <button class="btn-dark float-right" ng-click="nextView('address')">Next</button>
+                    <button class="btn-dark float-right" type="submit">Next</button>
                     <!--<button class="submit btn-primary float-right" ng-show="!((formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild') || (formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'))" ng-click="submitOrder()">Submit Order</button>-->
                     <!-- Add this back in eventually when the "disable non-required tabs" logic is figured out. -->
                 </div>
@@ -150,7 +135,7 @@
             <h5 class="card-title">Address Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form>
+                    <form ng-submit="nextView('build')">
                         <div class="form-row justify-content-center">
                             <div class="col-6 col-md-5 m-3">
                                 <input type="text" class="form-control form-control-sm" placeholder="Street Address" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-model="formData.streetAddress" />
@@ -174,7 +159,7 @@
                 </div>
                 <div class="col-12 justify-content-center mt-5">
                     <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
-                    <button class="btn-dark float-right" ng-click="nextView('build')">Next</button>
+                    <button class="btn-dark float-right" type="submit">Next</button>
                     <!--<button class="submit btn-primary float-right" ng-show="!((formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild') || (formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'))" ng-click="submitOrder()">Submit Order</button>-->
                     <!-- Add this back in eventually when the "disable non-required tabs" logic is figured out. -->
                 </div>
@@ -186,7 +171,7 @@
             <h5 class="card-title">Build Setup</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form>
+                    <form ng-submit="submitOrder()">
                         <div class="form-row justify-content-center">
                             <div class="col-12 col-md-9 m-3">
                                 <label class="d-inline m-3">
@@ -289,7 +274,7 @@
                 </div>
                 <div class="col-12 justify-content-center mt-5">
                     <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
-                    <button class="btn-primary float-right" ng-click="submitOrder()">Submit Order</button>
+                    <button class="btn-primary float-right" type="submit">Submit Order</button>
                 </div>
             </div>
         </div>
@@ -304,11 +289,7 @@
     </div>
 </aside>
 
-<div class="bg-dark">
-    <p> </p>
-</div>
 
-<section>
 
     <div name="orderReview" ng-show="orderReview && !loading">
         <!-- TODO: Add HTML for a nice columned list to pull in the values entered, also show Hard Coded "nice" values when ng-show conditions are met -->
@@ -389,10 +370,3 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-offset-5 sectionHeading" ng-show="loading" style="text-align: center;">
-        Submitting Order Request...
-        <div class="loader"></div>
-        Email should be received shortly.
-    </div>
-</section>
-<aside class="col-lg-2"></aside>

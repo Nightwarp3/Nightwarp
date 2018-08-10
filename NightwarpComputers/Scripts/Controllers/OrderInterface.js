@@ -39,9 +39,17 @@
         console.log($scope.formData);
         PostOrder($scope.formData);
     };
-    
+
     $scope.nextView = function (view) {
-        $scope.tab = view;
+        if (view === "address" && !($scope.formData.deliveryType === "ship" || $scope.formData.buildType === "orderOnly")) {
+            $scope.nextView("build");
+        }
+        else if (view === "build" && !($scope.formData.buildType === "buildOnly" || $scope.formData.buildType === "orderBuild")) {
+            $scope.nextView($scope.tab);
+        }
+        else {
+            $scope.tab = view;
+        }
         // since the current view will actually be already stored in the $scope.tab variable, makes it so we can test on it before we change :D
         // on each of these calls, run some validation...
         // IE: if a field ought to be required, then make sure it has a value.
