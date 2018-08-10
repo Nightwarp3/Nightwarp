@@ -11,6 +11,7 @@
             return this.orderFee + this.buildFee;
         }
     };
+    $scope.states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
     $scope.recalculateOrder = function () {
         $scope.fees.orderFee = 0.00;
@@ -38,22 +39,19 @@
         console.log($scope.formData);
         PostOrder($scope.formData);
     };
+    
+    $scope.nextView = function (view) {
+        $scope.tab = view;
+        // since the current view will actually be already stored in the $scope.tab variable, makes it so we can test on it before we change :D
+        // on each of these calls, run some validation...
+        // IE: if a field ought to be required, then make sure it has a value.
+        // Do a check to see if address should be required, if not then set $scope.tab to "build" or change "Next" to Submit.
+    };
 
-    $scope.contactView = function () {
-        $scope.tab = "contact";
-    }
-
-    $scope.orderView = function () {
-        $scope.tab = "order";
-    }
-
-    $scope.addressView = function () {
-        $scope.tab = "address";
-    }
-
-    $scope.buildView = function () {
-        $scope.tab = "build";
-    }
+    $scope.submitOrder = function () {
+        // maybe use modal to bring in a popup displaying all of the information for the sender to confirm?
+        console.log($scope.formData);
+    };
 
     var setupInputNames = function () {
         // Fees
