@@ -221,6 +221,7 @@
     <Content Include="Scripts\Bootstrap\bootstrap.bundle.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\Controllers\HomeController.js" />
     <Content Include="Scripts\Controllers\OrderInterface.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

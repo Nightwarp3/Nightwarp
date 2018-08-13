@@ -1,5 +1,6 @@
 ﻿var app = angular.module("pcBuildInterface", ["ngRoute"]);
 
+app.controller("HomeController", HomeController);
 app.controller("OrderInterface", OrderInterface);
 
 var configFunction = function ($routeProvider, $locationProvider) {
@@ -7,7 +8,8 @@ var configFunction = function ($routeProvider, $locationProvider) {
 
     $routeProvider
         .when("/Home", {
-            templateUrl: "routes/home"
+            templateUrl: "routes/home",
+            controller: "HomeController"
         })
         .when("/Order", {
             templateUrl: "routes/order",

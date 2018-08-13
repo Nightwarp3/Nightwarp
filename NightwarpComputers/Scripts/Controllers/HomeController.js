@@ -1,5 +1,4 @@
-﻿var HomeController = function ($scope) {
-    $scope.message = "Welcome to Nightwarp Computers!";
+﻿var HomeController = function ($scope, $location) {
 };
 
-HomeController.$inject = ['$scope'];
+HomeController.$inject = ['$scope', '$location'];
