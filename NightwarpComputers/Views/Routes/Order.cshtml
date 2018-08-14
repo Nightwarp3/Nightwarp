@@ -1,4 +1,4 @@
-﻿<aside class="bg-dark text-light col-lg-2 float-left">
+﻿<aside class="bg-dark text-light col-lg-2 col-sm-12 float-left">
     <div class="container">
         <div class="row text-center">
             <div class="col-12">Fee Breakdown:</div>
@@ -17,7 +17,7 @@
     </div>
 </aside>
 
-<section class="col-lg-8 float-left">
+<section class="col-lg-8 col-sm-12 float-left">
     <h2 class="text-lg-center">Order Request</h2>
     <div class="card text-center">
         <!-- Navigation Tabs for Order -->
@@ -277,7 +277,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" ng-class="{show: loading}" aria-labelledby="submittingOrderModal">
+    <div class="modal fade" id="loadingModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="submittingOrderModal">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -291,10 +291,11 @@
     </div>
 </section>
 
-<aside class="col-lg-2 float-left">
+<aside class="col-lg-2 col-sm-12 float-left">
     <div class="container">
         <div class="row">
             <img class="col-lg-12 col-sm-2" src="~/Content/Images/bg-showcase-3.jpg" />
         </div>
     </div>
 </aside>
+<div class="modal-backdrop fade show" ng-show="loading"></div>

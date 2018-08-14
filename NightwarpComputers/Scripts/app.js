@@ -17,8 +17,7 @@ var configFunction = function ($routeProvider, $locationProvider) {
             controller: "OrderInterface"
         })
         .when("/Submitted/:email/:orderId", {
-            templateUrl: "routes/submitted",
-            controller: "OrderSucessController"
+            templateUrl: function (params) { return "/routes/submitted?email=" + params.email + "&orderId=" + params.orderId }
         })
         .otherwise({
             redirectTo: "/Home"

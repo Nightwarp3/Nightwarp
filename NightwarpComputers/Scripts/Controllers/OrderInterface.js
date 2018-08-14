@@ -1,4 +1,4 @@
-﻿var OrderInterface = function ($scope, $location, $http, $window) {
+﻿var OrderInterface = function ($scope, $location, $http, $window, $timeout) {
 
     $scope.tab = "contact";
     $scope.formData = {};
@@ -29,7 +29,12 @@
         $scope.loading = true;
         setupInputNames();
         console.log($scope.formData);
-        PostOrder($scope.formData);
+        //PostOrder($scope.formData);
+        // Commenting out for tests
+        $timeout(function () {
+            $scope.loading = false;
+            $location.path("/Submitted/mdcampb93@gmail.com/00004321");
+        }, 5000);
     };
 
     $scope.nextView = function (view) {
@@ -81,4 +86,4 @@
     }
 };
 
-OrderInterface.$inject = ['$scope', '$location', '$http', '$window'];
+OrderInterface.$inject = ['$scope', '$location', '$http', '$window', '$timeout'];
