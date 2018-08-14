@@ -227,6 +227,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\Controllers\OrderSucessController.js" />
     <Content Include="Scripts\JQuery\jquery.js" />
     <Content Include="Scripts\JQuery\jquery.min.js" />
     <Content Include="Scripts\JQuery\jquery.slim.js" />
@@ -307,6 +308,7 @@
     <Content Include="Scripts\Bootstrap\bootstrap.js.map" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js.map" />
     <Content Include="Views\Home\index.cshtml" />
+    <Content Include="Views\Routes\Submitted.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

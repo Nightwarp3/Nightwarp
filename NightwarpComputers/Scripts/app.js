@@ -2,6 +2,7 @@
 
 app.controller("HomeController", HomeController);
 app.controller("OrderInterface", OrderInterface);
+app.controller("OrderSucessController", OrderSucessController);
 
 var configFunction = function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!').html5Mode(true);
@@ -14,6 +15,10 @@ var configFunction = function ($routeProvider, $locationProvider) {
         .when("/Order", {
             templateUrl: "routes/order",
             controller: "OrderInterface"
+        })
+        .when("/Submitted/:email/:orderId", {
+            templateUrl: "routes/submitted",
+            controller: "OrderSucessController"
         })
         .otherwise({
             redirectTo: "/Home"

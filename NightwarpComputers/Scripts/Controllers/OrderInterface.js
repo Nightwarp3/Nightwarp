@@ -25,40 +25,24 @@
         $scope.feeTotal = $scope.fees.calculateFee();
     };
 
-    $scope.reviewOrder = function () {
-        setupInputNames();
-        $scope.orderReview = true;
-    };
-
-    $scope.editOrder = function () {
-        $scope.orderReview = false;
-    };
-
     $scope.sendOrder = function () {
         $scope.loading = true;
+        setupInputNames();
         console.log($scope.formData);
         PostOrder($scope.formData);
     };
 
     $scope.nextView = function (view) {
-        if (view === "address" && !($scope.formData.deliveryType === "ship" || $scope.formData.buildType === "orderOnly")) {
+        if (view === "address" && ($scope.formData.deliveryType != "ship" && $scope.formData.buildType != "orderOnly")) {
             $scope.nextView("build");
         }
-        else if (view === "build" && !($scope.formData.buildType === "buildOnly" || $scope.formData.buildType === "orderBuild")) {
+        else if (view === "build" && ($scope.formData.buildType != "buildOnly" && $scope.formData.buildType != "orderBuild")) {
             $scope.nextView($scope.tab);
         }
         else {
             $scope.tab = view;
         }
-        // since the current view will actually be already stored in the $scope.tab variable, makes it so we can test on it before we change :D
-        // on each of these calls, run some validation...
-        // IE: if a field ought to be required, then make sure it has a value.
-        // Do a check to see if address should be required, if not then set $scope.tab to "build" or change "Next" to Submit.
-    };
-
-    $scope.submitOrder = function () {
-        // maybe use modal to bring in a popup displaying all of the information for the sender to confirm?
-        console.log($scope.formData);
+        // since the current view will actually be already stored in the $scope.tab variable, makes it so we can test on it before we change
     };
 
     var setupInputNames = function () {
@@ -88,14 +72,10 @@
         $http.post("api/Orders/PostOrder", JSON.stringify(json), config)
             .then(function (response) {
                 $scope.loading = false;
-                console.log(response.data);
-                $scope.completedOrder = response.data;
-                $window.alert("Order Submitted Successfully! Order ID is: " + response.data.OrderId + ". Received on: " + response.data.DateSubmitted);
-                // http.post returns the Order Object. Would be nice to display if successful on a new page that says success or something.
-                // http.post error returns...
+                $location.path("/Submitted/" + response.data.Email + "/" + response.data.OrderId);
             }, function (response) {
-                console.log(response);
                 $scope.loading = false;
+                console.log(response);
                 $window.alert(response.status + ": " + response.statusText + ". Please try again or contact Support.");
             });
     }

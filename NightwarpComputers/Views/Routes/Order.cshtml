@@ -43,7 +43,7 @@
             <h5 class="card-title">Contact Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form ng-submit="nextView('order')">
+                    <form name="contact">
                         <div class="form-row justify-content-center">
                             <div class="col-6 col-md-5 m-2">
                                 <input type="text" class="form-control form-control-sm" placeholder="Full Name" ng-maxlength="100" required ng-model="formData.name" />
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-12 justify-content-center mt-5">
                             <button class="btn-secondary float-left" disabled>Previous</button>
-                            <button type="submit" class="btn-dark float-right">Next</button>
+                            <button class="btn-dark float-right" ng-click="contact.$valid && nextView('order')">Next</button>
                         </div>
                     </form>
                 </div>
@@ -82,7 +82,7 @@
             <h5 class="card-title">Order Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form ng-submit="nextView('address')">
+                    <form name="order">
                         <div class="form-row justify-content-center">
                             <div class="col-12 col-md-9 m-3">
                                 <label class="d-lg-inline m-3">
@@ -119,13 +119,11 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-12 justify-content-center mt-5">
+                            <button class="btn-secondary float-left" ng-click="nextView('contact')">Previous</button>
+                            <button class="btn-dark float-right" ng-click="order.$valid && nextView('address')">Next</button>
+                        </div>
                     </form>
-                </div>
-                <div class="col-12 justify-content-center mt-5">
-                    <button class="btn-secondary float-left" ng-click="nextView('contact')">Previous</button>
-                    <button class="btn-dark float-right" type="submit">Next</button>
-                    <!--<button class="submit btn-primary float-right" ng-show="!((formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild') || (formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'))" ng-click="submitOrder()">Submit Order</button>-->
-                    <!-- Add this back in eventually when the "disable non-required tabs" logic is figured out. -->
                 </div>
             </div>
         </div>
@@ -135,7 +133,7 @@
             <h5 class="card-title">Address Information</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form ng-submit="nextView('build')">
+                    <form name="address">
                         <div class="form-row justify-content-center">
                             <div class="col-6 col-md-5 m-3">
                                 <input type="text" class="form-control form-control-sm" placeholder="Street Address" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-model="formData.streetAddress" />
@@ -155,13 +153,12 @@
                                 <input type="text" class="form-control form-control-sm" placeholder="Zip (55555)" ng-required="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-maxlength="5" ng-model="formData.zip" />
                             </div>
                         </div>
+                        <div class="col-12 justify-content-center mt-5">
+                            <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
+                            <button class="btn-dark float-right" ng-show="formData.deliveryType != 'ship' && formData.buildType != 'orderOnly'" ng-click="address.valid && nextView('build')">Next</button>
+                            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-show="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-click="address.valid && sendOrder()">Submit</button>
+                        </div>
                     </form>
-                </div>
-                <div class="col-12 justify-content-center mt-5">
-                    <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
-                    <button class="btn-dark float-right" type="submit">Next</button>
-                    <!--<button class="submit btn-primary float-right" ng-show="!((formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild') || (formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'))" ng-click="submitOrder()">Submit Order</button>-->
-                    <!-- Add this back in eventually when the "disable non-required tabs" logic is figured out. -->
                 </div>
             </div>
         </div>
@@ -171,7 +168,7 @@
             <h5 class="card-title">Build Setup</h5>
             <div class="row">
                 <div class="col-12 mx-auto">
-                    <form ng-submit="submitOrder()">
+                    <form name="build">
                         <div class="form-row justify-content-center">
                             <div class="col-12 col-md-9 m-3">
                                 <label class="d-lg-inline m-3">
@@ -270,11 +267,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 justify-content-center mt-5">
+                            <button class="btn btn-secondary float-left" ng-click="nextView('order')">Previous</button>
+                            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-click="build.$valid && sendOrder()">Submit Order</button>
+                        </div>
                     </form>
                 </div>
-                <div class="col-12 justify-content-center mt-5">
-                    <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
-                    <button class="btn-primary float-right" type="submit">Submit Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" ng-class="{show: loading}" aria-labelledby="submittingOrderModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title justify-content-center">Submitting Order...</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="loader justify-content-center"></div>
                 </div>
             </div>
         </div>

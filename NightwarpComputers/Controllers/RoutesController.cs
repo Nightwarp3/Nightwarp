@@ -16,5 +16,9 @@ namespace NightwarpComputers.Controllers
         {
             return View();
         }
+        public ActionResult Submitted()
+        {
+            return View();
+        }
     }
 }
