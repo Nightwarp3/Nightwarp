@@ -61,8 +61,7 @@ namespace NightwarpComputers.Models
         {
             // Convert string Json to Json Object, then populate into a Dictionary
             Dictionary<string, string> orderDict = JObject.Parse(jsonString).ToObject<Dictionary<string, string>>();
-
-            orderDict.TryGetValue("streetAddress2", out string streetAddress2);
+            
             orderDict.TryGetValue("phone", out string phoneNum);
 
             // Populate Order properties with Dictionary values
@@ -80,7 +79,7 @@ namespace NightwarpComputers.Models
                 case "orderOnly":
                     Usage = orderDict["useType"];
                     PriceLimit = orderDict["priceLimit"];
-                    StreetAddress = orderDict["streetAddress1"] + " " + streetAddress2;
+                    StreetAddress = orderDict["streetAddress"];
                     City = orderDict["city"];
                     State = orderDict["state"];
                     Zip = orderDict["zip"];
@@ -97,7 +96,7 @@ namespace NightwarpComputers.Models
             switch (ShipMethod)
             {
                 case "ship":
-                    StreetAddress = orderDict["streetAddress1"] + " " + streetAddress2;
+                    StreetAddress = orderDict["streetAddress"];
                     City = orderDict["city"];
                     State = orderDict["state"];
                     Zip = orderDict["zip"];

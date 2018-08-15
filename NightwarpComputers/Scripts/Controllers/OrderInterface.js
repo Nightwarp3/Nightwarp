@@ -1,6 +1,6 @@
-﻿var OrderInterface = function ($scope, $location, $http, $window) {
+﻿var OrderInterface = function ($scope, $location, $http, $window, $timeout) {
 
-    $scope.message = "Nightwarp Computers - Order Request";
+    $scope.tab = "contact";
     $scope.formData = {};
     $scope.orderSubmitted = false;
     $scope.feeTotal = 0.00;
@@ -11,6 +11,7 @@
             return this.orderFee + this.buildFee;
         }
     };
+    $scope.states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
     $scope.recalculateOrder = function () {
         $scope.fees.orderFee = 0.00;
@@ -24,19 +25,27 @@
         $scope.feeTotal = $scope.fees.calculateFee();
     };
 
-    $scope.reviewOrder = function () {
-        setupInputNames();
-        $scope.orderReview = true;
-    };
-
-    $scope.editOrder = function () {
-        $scope.orderReview = false;
-    };
-
     $scope.sendOrder = function () {
         $scope.loading = true;
-        console.log($scope.formData);
+        setupInputNames();
         PostOrder($scope.formData);
+        /*$timeout(function () {
+            $scope.loading = false;
+            $location.path("/Submitted/mdcampb93@gmail.com/00004321");
+        }, 5000);*/
+    };
+
+    $scope.nextView = function (view) {
+        if (view === "address" && ($scope.formData.deliveryType != "ship" && $scope.formData.buildType != "orderOnly")) {
+            $scope.nextView("build");
+        }
+        else if (view === "build" && ($scope.formData.buildType != "buildOnly" && $scope.formData.buildType != "orderBuild")) {
+            $scope.nextView($scope.tab);
+        }
+        else {
+            $scope.tab = view;
+        }
+        // since the current view will actually be already stored in the $scope.tab variable, makes it so we can test on it before we change
     };
 
     var setupInputNames = function () {
@@ -66,17 +75,13 @@
         $http.post("api/Orders/PostOrder", JSON.stringify(json), config)
             .then(function (response) {
                 $scope.loading = false;
-                console.log(response.data);
-                $scope.completedOrder = response.data;
-                $window.alert("Order Submitted Successfully! Order ID is: " + response.data.OrderId + ". Received on: " + response.data.DateSubmitted);
-                // http.post returns the Order Object. Would be nice to display if successful on a new page that says success or something.
-                // http.post error returns...
+                $location.path("/Submitted/" + response.data.Email + "/" + response.data.OrderId);
             }, function (response) {
-                console.log(response);
                 $scope.loading = false;
+                console.log(response);
                 $window.alert(response.status + ": " + response.statusText + ". Please try again or contact Support.");
             });
     }
 };
 
-OrderInterface.$inject = ['$scope', '$location', '$http', '$window'];
+OrderInterface.$inject = ['$scope', '$location', '$http', '$window', '$timeout'];

@@ -16,5 +16,11 @@ namespace NightwarpComputers.Controllers
         {
             return View();
         }
+        public ActionResult Submitted(string email, int orderId)
+        {
+            ViewBag.Email = email;
+            ViewBag.OrderId = orderId;
+            return View();
+        }
     }
 }
