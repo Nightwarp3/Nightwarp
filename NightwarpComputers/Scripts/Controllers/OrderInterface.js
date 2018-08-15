@@ -28,13 +28,11 @@
     $scope.sendOrder = function () {
         $scope.loading = true;
         setupInputNames();
-        console.log($scope.formData);
-        //PostOrder($scope.formData);
-        // Commenting out for tests
-        $timeout(function () {
+        PostOrder($scope.formData);
+        /*$timeout(function () {
             $scope.loading = false;
             $location.path("/Submitted/mdcampb93@gmail.com/00004321");
-        }, 5000);
+        }, 5000);*/
     };
 
     $scope.nextView = function (view) {
