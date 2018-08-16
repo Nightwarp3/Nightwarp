@@ -197,10 +197,13 @@
     <Content Include="Content\Images\bg-showcase-1.jpg" />
     <Content Include="Content\Images\bg-showcase-2.jpg" />
     <Content Include="Content\Images\bg-showcase-3.jpg" />
+    <Content Include="Content\Images\communication.png" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\main.jpg" />
+    <Content Include="Content\Images\PC.jpg" />
+    <Content Include="Content\Images\technicians.jpg" />
     <Content Include="Content\Images\testimonials-1.jpg" />
     <Content Include="Content\Images\testimonials-2.jpg" />
     <Content Include="Content\Images\testimonials-3.jpg" />
