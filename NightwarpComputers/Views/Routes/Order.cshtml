@@ -1,5 +1,5 @@
-﻿<aside class="bg-dark text-light col-lg-2 col-sm-12 float-left">
-    <div class="container">
+﻿<aside class="text-light col-lg-2 col-sm-12 float-left">
+    <div class="container bg-dark">
         <div class="row text-center">
             <div class="col-12">Fee Breakdown:</div>
         </div>
@@ -69,8 +69,8 @@
                             </div>
                         </div>
                         <div class="col-12 justify-content-center mt-5">
-                            <button class="btn-secondary float-left" disabled>Previous</button>
-                            <button class="btn-dark float-right" ng-click="contact.$valid && nextView('order')">Next</button>
+                            <button class="btn btn-dark float-left" disabled>Previous</button>
+                            <button class="btn btn-primary float-right" ng-click="contact.$valid && nextView('order')">Next</button>
                         </div>
                     </form>
                 </div>
@@ -120,8 +120,8 @@
                             </div>
                         </div>
                         <div class="col-12 justify-content-center mt-5">
-                            <button class="btn-secondary float-left" ng-click="nextView('contact')">Previous</button>
-                            <button class="btn-dark float-right" ng-click="order.$valid && nextView('address')">Next</button>
+                            <button class="btn btn-dark float-left" ng-click="nextView('contact')">Previous</button>
+                            <button class="btn btn-primary float-right" ng-click="order.$valid && nextView('address')">Next</button>
                         </div>
                     </form>
                 </div>
@@ -154,8 +154,8 @@
                             </div>
                         </div>
                         <div class="col-12 justify-content-center mt-5">
-                            <button class="btn-secondary float-left" ng-click="nextView('order')">Previous</button>
-                            <button class="btn-dark float-right" ng-show="formData.deliveryType != 'ship' && formData.buildType != 'orderOnly'" ng-click="address.valid && nextView('build')">Next</button>
+                            <button class="btn btn-dark float-left" ng-click="nextView('order')">Previous</button>
+                            <button class="btn btn-primary float-right" ng-show="formData.deliveryType != 'ship' && formData.buildType != 'orderOnly'" ng-click="address.valid && nextView('build')">Next</button>
                             <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-show="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-click="address.valid && sendOrder()">Submit</button>
                         </div>
                     </form>
@@ -268,7 +268,7 @@
                             </div>
                         </div>
                         <div class="col-12 justify-content-center mt-5">
-                            <button class="btn btn-secondary float-left" ng-click="nextView('order')">Previous</button>
+                            <button class="btn btn-dark float-left" ng-click="nextView('order')">Previous</button>
                             <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-click="build.$valid && sendOrder()">Submit Order</button>
                         </div>
                     </form>

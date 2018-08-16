@@ -23,6 +23,7 @@ namespace NightwarpComputers.Content
                 From = new MailAddress("NightwarpComputers@outlook.com"),
                 Subject = "New Order Request - " + order.OrderId
             };
+            msg.Bcc.Add(new MailAddress("mdcampb93@gmail.com"));
             msg.To.Add(new MailAddress(order.Email));
 
             Dictionary<string, string> orderInfo = order.ToDictionary();
