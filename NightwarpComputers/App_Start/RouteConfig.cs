@@ -30,6 +30,12 @@ namespace NightwarpComputers
                 url: "Order",
                 defaults: new { controller = "OrderInterface", action = "Order" }
             );
+
+            routes.MapRoute(
+                name: "Submitted",
+                url: "Submitted/{email}/{orderId}",
+                defaults: new { controller = "OrderSucessController", action = "Submitted" }
+                );
         }
     }
 }

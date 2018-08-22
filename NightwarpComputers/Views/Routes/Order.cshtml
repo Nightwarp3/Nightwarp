@@ -155,8 +155,8 @@
                         </div>
                         <div class="col-12 justify-content-center mt-5">
                             <button class="btn btn-dark float-left" ng-click="nextView('order')">Previous</button>
-                            <button class="btn btn-primary float-right" ng-show="formData.deliveryType != 'ship' && formData.buildType != 'orderOnly'" ng-click="address.valid && nextView('build')">Next</button>
-                            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-show="formData.deliveryType == 'ship' || formData.buildType == 'orderOnly'" ng-click="address.valid && sendOrder()">Submit</button>
+                            <button class="btn btn-primary float-right" ng-show="formData.deliveryType != 'ship' || formData.buildType != 'orderOnly'" ng-click="address.valid && nextView('build')">Next</button>
+                            <button class="btn btn-primary float-right" type="button" ng-show="formData.deliveryType == 'ship' && formData.buildType == 'orderOnly'" ng-click="address.valid && sendOrder()">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -178,7 +178,9 @@
                                     <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="preferences" ng-model="formData.partPreference">Select Preferences
                                 </label>
                                 <label class="d-lg-inline m-3">
-                                    <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="noPreference" ng-model="formData.partPreference">Builder's Choice
+                                    <input type="radio" ng-required="formData.buildType == 'buildOnly' || formData.buildType == 'orderBuild'" name="partPreference" ng-change="recalculateOrder()" value="noPreference" ng-model="formData.partPreference">
+                                    <span ng-show="formData.deliveryType != 'pickup' && formData.buildType != 'buildOnly'">Builder's Choice</span>
+                                    <span ng-show="formData.deliveryType == 'pickup' && formData.buildType == 'buildOnly'">Bring Your Own</span>
                                 </label>
                             </div>
                         </div>
@@ -269,7 +271,7 @@
                         </div>
                         <div class="col-12 justify-content-center mt-5">
                             <button class="btn btn-dark float-left" ng-click="nextView('order')">Previous</button>
-                            <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#loadingModal" ng-click="build.$valid && sendOrder()">Submit Order</button>
+                            <button class="btn btn-primary float-right" type="button" ng-click="build.$valid && sendOrder()">Submit Order</button>
                         </div>
                     </form>
                 </div>
@@ -277,7 +279,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="loadingModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="submittingOrderModal">
+    <div class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="submittingOrderModal" ng-show="loading" ng-class="{'d-block': loading}">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -298,4 +300,5 @@
         </div>
     </div>
 </aside>
+
 <div class="modal-backdrop fade show" ng-show="loading"></div>
