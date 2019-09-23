@@ -1,0 +1,9 @@
+@import './app/styles/dark-theme.style.scss';
+// @import './app/styles/light-theme.style.scss';
+
+body {
+    background-color: $backgroundColor;
+    color: $foregroundColor;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
