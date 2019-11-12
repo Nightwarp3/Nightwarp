@@ -1,9 +1,39 @@
-@import './app/styles/dark-theme.style.scss';
-// @import './app/styles/light-theme.style.scss';
+@import "~@angular/material/theming";
 
-body {
-    background-color: $backgroundColor;
-    color: $foregroundColor;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+@include mat-core();
+
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent: mat-palette($mat-blue-grey);
+
+$candy-app-warn: mat-palette($mat-red);
+
+$candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+@include angular-material-theme($candy-app-theme);
+
+// body {
+//     font-family: Verdana, Geneva, Tahoma, sans-serif;
+//     margin: 0;
+// }
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.view{
+    min-height: 100vh;
+    height: auto !important;
+    width: auto !important;
+    min-width: 80vw;
     margin: 0;
+    padding: 0;
+
+    .link {
+        display: block;
+        font-size: 25px;
+        border: 1px solid gray;
+        width: 100%;
+    }
+}
+
+mat-card {
+    margin: 15px;
 }

@@ -1,0 +1,20 @@
+<h2 style="text-align: center;">Wolves!</h2>
+<div *ngFor="let wolf of wolves" style="width: 50%; margin: 0 auto;">
+    <mat-card>
+        <mat-card-title>{{wolf.name}}</mat-card-title>
+        <mat-card-content>
+            <img src="{{wolf.imageRef}}" height="100" width="100" style="float: left;"/>
+            <mat-list>
+                <mat-list-item>
+                    <strong>Birthday: {{wolf.birthday | date}}</strong>
+                </mat-list-item>
+                <mat-list-item>
+                    <strong>Age: {{wolf.age}}</strong>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div>
+    <button mat-button (click)="addWolf()" style="margin: 0 auto;">Add Wolf</button>
+</div>

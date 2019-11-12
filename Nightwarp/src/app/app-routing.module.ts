@@ -5,9 +5,9 @@ import { AboutComponent } from './components/about/about.component';
 import { OrderComponent } from './components/order/order.component';
 
 const routes: Routes = [
-  { path: 'about', component: AboutComponent },
-  { path: 'order', component: OrderComponent },
-  { path: '**', component: HomeComponent }
+  // { path: 'about', component: AboutComponent },
+  // { path: 'order', component: OrderComponent },
+  // { path: '**', component: HomeComponent }
 
 ];
 

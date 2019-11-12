@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Nightwarp';
+
+  public selected: string = '';
+
+  public changeView(selected: string){
+    this.selected = selected;
+  }
 }

@@ -1,8 +1,46 @@
-<nav-bar></nav-bar>
+<mat-drawer-container class="view col-12">
+    <mat-drawer mode="side" opened>
+        <button class="link" mat-button (click)="changeView('Wolves')">Wolves</button>
+        <button class="link" mat-button (click)="changeView('Leaders')">Leaders</button>
+    </mat-drawer>
+    <mat-drawer-content>
+        <wolves *ngIf="selected === 'Wolves'"></wolves>
+        <leaders *ngIf="selected === 'Leaders'"></leaders>
+        <div *ngIf="selected === ''">
+            <mat-card>
+                <mat-card-title>Cub Scouts</mat-card-title>
+                <mat-card-content>
+                    <div style="margin: 0 auto;">
+                        <h4>Please select a tab on the left...</h4>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <nav-bar></nav-bar>
 <div class="content">
     <side-bar class="side-bar"></side-bar>
     <div class="view">
         <router-outlet></router-outlet>
     </div>
     <side-bar class="side-bar"></side-bar>
-</div>
+</div> -->
