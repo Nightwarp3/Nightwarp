@@ -1,0 +1,27 @@
+<mat-toolbar class="nav-bar">
+    <span>
+        <a mat-button href="order">
+            <i class="far fa-file-alt"></i>
+            Order
+        </a>
+        <a mat-button href="completed-builds">
+            <i class="fas fa-desktop"></i>
+            Completed Builds
+        </a>
+    </span>
+    <span class="logo">
+        <!-- Logo here... -->
+        <h3>
+            <a mat-button href="">Nightwarp</a>
+        </h3>
+    </span>
+    <span>
+        <i class="fas fa-sign-in-alt"></i>
+        <input mat-button type="button" (click)="openDialog()" value="Log In" />
+        <!-- Perhaps no sign up, just use Facebook or Google for sign in? -->
+        <!-- <a mat-flat-button href="">
+            <i class="fas fa-user"></i>
+            Sign Up
+        </a> -->
+    </span>
+</mat-toolbar>
