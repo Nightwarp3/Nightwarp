@@ -1,8 +1,56 @@
 .nav-bar {
-    display: flex;
-}
+	display: flex;
+	
+	.home {
+		padding-left: 0;
 
-.logo{
-    text-align: center;
-    flex: 1 1 auto;
+		.mat-button-focus-overlay {
+			display: none !important;
+		}
+	}
+	
+	a {
+		font-size: 12pt;
+	}
+	
+	.nav-buttons {
+		border-left: 1px solid #7c7c7c;
+		flex: 1 1 auto;
+		padding-left: 10px;
+	
+		.far, .fas, .fa {
+			padding: 2.5px;
+		}
+	}
+	
+	.logo{
+		padding-right: 5px;
+	}
+	
+	.title {
+		font-size: 15pt;
+		color: teal;
+	}
+
+	.sign-in {
+		.fas, .far, .fa, .fab {
+			border-right: 1px solid #7c7c7c;
+			padding-right: 5px;
+		}
+
+		a {
+			margin: 5px;
+		}
+	}
+
+	.signed-in {
+		height: inherit;
+
+		img {
+			height: 35px;
+			width: 35px;
+			border-radius: 25px;
+			margin-right: 10px;
+		}
+	}
 }

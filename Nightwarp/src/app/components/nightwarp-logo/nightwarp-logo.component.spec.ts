@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultComponent } from './default.component';
+import { NightwarpLogoComponent } from './nightwarp-logo.component';
 
-describe('DefaultComponent', () => {
-  let component: DefaultComponent;
-  let fixture: ComponentFixture<DefaultComponent>;
+describe('NightwarpLogoComponent', () => {
+  let component: NightwarpLogoComponent;
+  let fixture: ComponentFixture<NightwarpLogoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DefaultComponent ]
+      declarations: [ NightwarpLogoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultComponent);
+    fixture = TestBed.createComponent(NightwarpLogoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

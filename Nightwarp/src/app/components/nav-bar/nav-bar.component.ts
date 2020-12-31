@@ -1,30 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
-import { LogInDialogComponent } from '../log-in-dialog/log-in-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'nav-bar',
     templateUrl: './nav-bar.component.html',
-    styleUrls: ['./nav-bar.component.scss']
+	styleUrls: ['./nav-bar.component.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 export class NavBarComponent implements OnInit {
-    public user: any;
 
-    constructor(public dialog: MatDialog) { }
+    constructor(public authService: AuthService) { }
 
     ngOnInit(): void {
-    }
-
-    openDialog(): void {
-        const dialogRef = this.dialog.open(LogInDialogComponent, {
-            width: '500px',
-            data: {}
-        });
-        
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            this.user = result;
-        });
     }
 }
